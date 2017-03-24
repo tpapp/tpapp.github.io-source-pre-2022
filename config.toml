@@ -1,0 +1,14 @@
+baseurl = "http://tpapp.github.io/"
+languageCode = "en-us"
+title = "Tamás K. Papp's blog"
+theme = "hugo-theme-geppaku"
+relativeURLs = true
+# uglyurls = true
+disqusShortname = "tpappgithubio"
+
+[author]
+        name = "Tamás K. Papp"
+        github = "tpapp"
+
+[params]
+        mathjax = true

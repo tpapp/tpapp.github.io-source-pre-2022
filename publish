@@ -1,0 +1,10 @@
+#!/bin/bash
+# script for publishing to Github pages. Based on the Hugo
+# documentation.  erases the contents of the target directory without
+# asking, then pushes that as a git repo.
+PUB=./public
+rm -R ./$PUB/*
+hugo
+cd $PUB
+git add --all && git commit -m "Publishing to gh-pages."
+git push origin master
