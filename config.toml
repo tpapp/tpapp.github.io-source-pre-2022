@@ -3,7 +3,6 @@ languageCode = "en-us"
 title = "Tamás K. Papp's blog"
 theme = "hugo-theme-geppaku"
 relativeURLs = true
-# uglyurls = true
 disqusShortname = "tpappgithubio"
 Copyright = "Copyright 2017, Tamás K. Papp. [CC-BY-SA](https://creativecommons.org/licenses/by-sa/4.0/legalcode)."
 
