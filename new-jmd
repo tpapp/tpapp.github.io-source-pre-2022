@@ -1,0 +1,15 @@
+#!/bin/bash
+if [ $# -ne 1 ]
+  then
+    echo """
+Use as
+    new-jmd postname (without extension)
+"""
+fi
+
+FILE="post/$1.md"
+JMDFILE="julia-source/$1.jmd"
+hugo new $FILE
+mv content/$FILE $JMDFILE
+echo "You can start editing the file " $JMDFILE "."
+echo "Call jweave on it for weaving."
