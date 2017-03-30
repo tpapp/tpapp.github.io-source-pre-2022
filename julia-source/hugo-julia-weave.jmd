@@ -29,7 +29,7 @@ end
 ```
 
 A plot:
-```julia
+```{julia; fig_cap="Caption for this plot"}
 x = 1:10
 y = x.^2
 scatter(x, y, legend = false)
