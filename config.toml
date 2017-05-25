@@ -12,3 +12,6 @@ Copyright = "Copyright 2017, Tamás K. Papp. [CC-BY-SA](https://creativecommons.
 
 [params]
         mathjax = true
+
+[blackfriday]
+        extensionsmask = ["backslashLineBreak"]

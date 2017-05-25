@@ -37,7 +37,7 @@ The above is well-known, but the following two tricks are worth mentioning.
 
 Suppose that you are changing a variable by using a chain of two functions $f \circ g$. Then
 \begin{multline}
-\log\det J\_{f \circ g}(y) = \log \bigl(\det J\_f(g(y)) \cdot \det J\_g(y)\bigr) \newline
+\log\det J\_{f \circ g}(y) = \log \bigl(\det J\_f(g(y)) \cdot \det J\_g(y)\bigr) \\\\
 = \log\det J\_f(g(y)) + \log\det J\_g(y)
 \end{multline}
 which means that you can simply add (the log determinant of) the Jacobians, of course evaluated at the appropriate points.
@@ -58,7 +58,7 @@ $$g(x,y) = [f(x,y), y]^\top$$
 where $g : \mathbb{R}^{m+n} \to \mathbb{R}^{m+n}$. Since $y$ is mapped to itself,
 $$
 J_g = \begin{bmatrix}
-J\_{f,x} & J\_{f,y} \newline
+J\_{f,x} & J\_{f,y} \\\\
 0 & I
 \end{bmatrix}
 $$
