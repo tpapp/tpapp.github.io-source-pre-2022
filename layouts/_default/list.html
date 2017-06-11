@@ -1,0 +1,12 @@
+{{ partial "header.html" . }}
+
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+{{ range .Paginator.Pages  }}
+<p><a href="{{ .Permalink }}">{{ .Title }}</a>&emsp;
+  <span class="date">{{ .Date.Format "2006-01-02" }}</span>&emsp;
+  {{- partial "tags.html" . }}
+</p>
+{{ end }}
+
+{{ partial "footer.html" . }}

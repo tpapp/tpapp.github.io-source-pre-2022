@@ -48,4 +48,4 @@ scatter(x, y, legend = false)
 ````
 
 
-{{< figure src="../figures/hugo-julia-weave_4_1.svg" title="Caption for this plot"  > }}
+{{< figure src="../figures/hugo-julia-weave_4_1.svg" title="Caption for this plot" >}}

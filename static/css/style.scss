@@ -1,0 +1,104 @@
+$lightbg: #fff;
+$lightfg: #222;
+$lighthover: #5a59a5;
+$fadefg: #aaa;
+$fadehover: #5a59a5;
+$darkbg: #333;
+$darkfg: #eee;
+$darkhover: #8785f7;
+           
+$navbarheight: 3rem;
+$nidebarwidth: 12rem;
+
+body {
+    left: 0;
+    top: 0;
+    margin: 0px;
+    padding: 0px;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: $navbarheight;
+    background-color: $darkbg;
+    a {
+        float: left;
+        display: block;
+        color: $darkfg;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    a:hover {
+        color: $darkhover;
+    }
+}
+
+#content {
+    margin-top: ($navbarheight*1.3);
+    padding: 2em;
+    max-width: 50em;
+    margin-left: 6em;
+    p {
+        text-align: justify;
+        a {
+            text-decoration: underline;
+            text-decoration-color: $fadefg;
+        }
+    }
+    a {
+        text-decoration: none;
+        color: $lightfg;
+    }
+    a:hover {
+        color: $lighthover;
+    }
+    pre {
+        padding: 0.5em;
+        background: $darkbg;
+        font-family: 'Roboto Mono', monospace;
+    }
+    .tags {
+        overflow: hidden;
+        a {
+            text-decoration: none;
+            color: $fadefg;
+            padding: 0;
+        }
+        a:hover {
+            text-decoration: none;
+            color: $fadehover;
+        }
+    }
+}
+
+#sidebar {
+    position: fixed;
+    display: block;
+    right: 0;
+    top: 5rem;
+    z-index: 9998;
+    width: 12rem;
+    height: 100%;
+    background-color: #fff;
+    a {
+        float: left;
+        display: inline;
+        font-size: 80%;
+        color: $fadefg;
+        text-align: justified;
+        padding: 2px 2px;
+    text-decoration: none;
+    }
+    a:hover {
+        color: $fadehover;
+    }
+}
+
+.date {
+    font-style: italic;
+}

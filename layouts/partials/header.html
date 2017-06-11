@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    {{ .Hugo.Generator }}
+    <link rel="stylesheet" type="text/css" href="{{ "/css/fonts.css" | relURL }}">
+    <link rel="stylesheet" type="text/css" href="{{ "/css/style.css" | relURL }}">
+    <link rel="stylesheet" type="text/css" href="{{ "/css/monokai.css" | relURL }}">
+    {{ if .RSSLink }}
+    <link href="{{ .RSSLink }}" rel="alternate feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+    {{ end }}
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [['$','$'], ['\\(','\\)']],
+          displayMath: [['$$','$$'], ['\[','\]']],
+          processEscapes: true,
+          processEnvironments: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+          TeX: { equationNumbers: { autoNumber: "AMS" },
+               extensions: ["AMSmath.js", "AMSsymbols.js"] }
+        }
+      });
+    </script>
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="{{ .Site.BaseURL }}">About</a>
+      <a href="{{ "research" | absURL }}">Research</a>
+      <a href="{{ "blog" | absURL }}">Blog</a>
+      <a href="{{ "software" | absURL }}">Software</a>
+
+      <a href="https://github.com/tpapp/">Github</a>
+    </nav>
+
+    <div id="content">
