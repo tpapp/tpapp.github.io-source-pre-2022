@@ -45,14 +45,11 @@ body {
     margin-left: 6em;
     p {
         text-align: justify;
-        a {
-            text-decoration: underline;
-            text-decoration-color: $fadefg;
-        }
     }
     a {
-        text-decoration: none;
         color: $lightfg;
+        text-decoration: underline;
+        text-decoration-color: $fadefg;
     }
     a:hover {
         color: $lighthover;
@@ -69,8 +66,12 @@ body {
             padding: 0;
         }
         a:hover {
-            text-decoration: none;
             color: $fadehover;
+        }
+    }
+    #pagenav {
+        .pagenav-label {
+            color: $fadefg;
         }
     }
 }
@@ -85,13 +86,11 @@ body {
     height: 100%;
     background-color: #fff;
     a {
-        float: left;
-        display: inline;
         font-size: 80%;
         color: $fadefg;
-        text-align: justified;
-        padding: 2px 2px;
-    text-decoration: none;
+        padding: 1px;
+        margin: 1px;
+        text-decoration: none;
     }
     a:hover {
         color: $fadehover;

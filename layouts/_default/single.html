@@ -6,4 +6,18 @@
 
 {{ .Content }}
 
+{{ if or .Prev .Next }}
+<div id="pagenav">
+  {{ if .Next }}
+  <span class="pagenav-label">Previous</span>
+  <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
+  {{ end }}
+  {{ if .Prev }}
+  <span class="pagenav-label">Next</span>
+  <a href="{{ .Prev.Permalink }}">{{ .Prev.Title }}</a>
+  {{ end }}
+</div>
+{{ end }}
+{{ template "_internal/disqus.html" . }}
+
 {{ partial "footer.html" . }}

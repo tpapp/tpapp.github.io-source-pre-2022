@@ -29,12 +29,10 @@ body {
   margin-left: 6em; }
   #content p {
     text-align: justify; }
-    #content p a {
-      text-decoration: underline;
-      text-decoration-color: #aaa; }
   #content a {
-    text-decoration: none;
-    color: #222; }
+    color: #222;
+    text-decoration: underline;
+    text-decoration-color: #aaa; }
   #content a:hover {
     color: #5a59a5; }
   #content pre {
@@ -47,8 +45,9 @@ body {
       color: #aaa;
       padding: 0; }
     #content .tags a:hover {
-      text-decoration: none;
       color: #5a59a5; }
+  #content #pagenav .pagenav-label {
+    color: #aaa; }
 
 #sidebar {
   position: fixed;
@@ -60,12 +59,10 @@ body {
   height: 100%;
   background-color: #fff; }
   #sidebar a {
-    float: left;
-    display: inline;
     font-size: 80%;
     color: #aaa;
-    text-align: justified;
-    padding: 2px 2px;
+    padding: 1px;
+    margin: 1px;
     text-decoration: none; }
   #sidebar a:hover {
     color: #5a59a5; }
