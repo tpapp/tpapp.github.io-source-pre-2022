@@ -1,3 +1,6 @@
 public/*
 themes/
 content/post/figures
+*~
+static/css/style.css.map
+static/css/.sass-cache/
