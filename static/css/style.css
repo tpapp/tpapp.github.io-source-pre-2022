@@ -39,7 +39,6 @@ body {
     color: #5a59a5; }
   #content pre {
     padding: 0.5em;
-    background: #333;
     font-family: 'Roboto Mono', monospace; }
   #content .tags {
     overflow: hidden; }
