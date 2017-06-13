@@ -32,7 +32,7 @@ I will call $K$ the *last lag*. [Stan](http://mc-stan.org/) does something sligh
 
 ## The sampling variation
 
-I was coding up the above calculation, and needed some unit tests. Surprisignly, I could not find anything on the sampling variation of $\tau$, so I wrote some simulations in Julia ([source code for everything](https://gist.github.com/tpapp/c1d5d267a8dcc4c9278de6a101622cdc)). I did the following simulation exercise:
+I was coding up the above calculation, and needed some unit tests. Surprisignly, I could not find anything on the sampling variation of $\tau$, so I wrote some simulations in Julia ([source code for everything](../ess-sampling.jl)). I did the following simulation exercise:
 
 1. for a given autocorrelation coefficient $\phi$, simulate $N$ draws from the AR(1) process
 \[
@@ -49,9 +49,9 @@ I use $N=1000$ and $N=10000$, as these would be typical sample sizes, first for 
 
 Let $\phi=0$, then we expect $\tau=1$ (red line in histogram, coefficient of variation on top).
 
-{{< figure src="../figures/ess-phi0N1000.svg"
+{{< figure src="../ess-phi0N1000.svg"
 title="Results with $\phi=0$ (IID), $N=1000$. (a) $\tau$, (b) last lag $K$, (c) scatterplot." >}}
-{{< figure src="../figures/ess-phi0N10000.svg"
+{{< figure src="../ess-phi0N10000.svg"
 title="Results with $\phi=0$ (IID), $N=10000$. (a) $\tau$, (b) last lag $K$, (c) scatterplot." >}}
 
 With $1000$ samples, there is a lot of variation in ESS: 800 could show up very easily in practice. $600$ is not improbable either. Using up to $10$ lags is not uncommon.
@@ -64,9 +64,9 @@ For both sample sizes, notice the high correlation between the last lag $K$, and
 
 This is a more autocorrelated process, here theory tells us that $\tau$=1/3.
 
-{{< figure src="../figures/ess-phi05N1000.svg"
+{{< figure src="../ess-phi05N1000.svg"
 title="Results with $\phi=0.5$, $N=1000$. (a) $\tau$, (b) last lag $K$, (c) scatterplot." >}}
-{{< figure src="../figures/ess-phi05N10000.svg"
+{{< figure src="../ess-phi05N10000.svg"
 title="Results with $\phi=0.5$, $N=10000$. (a) $\tau$, (b) last lag $K$, (c) scatterplot." >}}
 
 Notice that $\tau$ is now more dispersed, compared to the IID case. Even with 10000 samples, the coefficient of variation is 6%, with 1000 it is around 1/6. In practice, expect effective sample sizes all over the place.
@@ -75,9 +75,9 @@ Notice that $\tau$ is now more dispersed, compared to the IID case. Even with 10
 
 This is an even more autocorrelated process, here theory tells us that $\tau$=1/9.
 
-{{< figure src="../figures/ess-phi08N1000.svg"
+{{< figure src="../ess-phi08N1000.svg"
 title="Results with $\phi=0.8$, $N=1000$. (a) $\tau$, (b) last lag $K$, (c) scatterplot." >}}
-{{< figure src="../figures/ess-phi08N10000.svg"
+{{< figure src="../ess-phi08N10000.svg"
 title="Results with $\phi=0.8$, $N=10000$. (a) $\tau$, (b) last lag $K$, (c) scatterplot." >}}
 
 There is now so much variation that in order to get an estimate for ESS that we can use for comparing various MCMC implementations, we need to run much more than $1000$ samples.
