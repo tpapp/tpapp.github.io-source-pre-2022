@@ -48,6 +48,18 @@ body {
       color: #5a59a5; }
   #content #pagenav .pagenav-label {
     color: #aaa; }
+  #content figure {
+    padding: 0em;
+    margin: 0em; }
+    #content figure img {
+      width: 100%;
+      padding: 0em;
+      margin: 0em; }
+    #content figure figcaption h4 {
+      padding: 0em;
+      margin: 0em 0em 2em 0em;
+      font-size: 1em;
+      font-style: italic; }
 
 #sidebar {
   position: fixed;
