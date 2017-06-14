@@ -116,6 +116,10 @@ small, .font_small {
     text-decoration: none; }
   #sidebar a:hover {
     color: #5a59a5; }
+  #sidebar img#tamaskpapp {
+    float: left;
+    width: 10em;
+    margin: 1em; }
 
 .date {
   font-style: italic; }
