@@ -1,6 +1,7 @@
 +++
 date = "2017-06-12T14:12:43+02:00"
 title = "Blog redesign"
+tags = ["blogging"]
 +++
 
 I am in the process of rebuilding my personal website using [Hugo](http://gohugo.io/). I tried various themes, including [hugo-academic](https://github.com/gcushen/hugo-academic), but in the process of adapting them to my needs I realized that it is less work to write one from scratch.
