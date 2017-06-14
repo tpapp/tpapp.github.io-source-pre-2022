@@ -7,6 +7,11 @@ title = "Research"
 
 Researcher at the [Institute for Advanced Studies, Vienna](http://www.ihs.ac.at/research-groups/macroeconomics-and-public-finance/).
 
+## Contact
+
+* E-mail: <tkpapp@gmail.com>
+* Github (issues, PRs): <https://github.com/tpapp>
+
 ## Employment
 
 * 2009--present: Institute for Advanced Studies
