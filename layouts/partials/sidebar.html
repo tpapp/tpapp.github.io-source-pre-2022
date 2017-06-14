@@ -1,0 +1,5 @@
+<div id="sidebar">
+  {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+  <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}">{{ $name }}</a>
+  {{ end }}
+</div>
