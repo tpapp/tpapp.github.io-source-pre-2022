@@ -1,5 +1,6 @@
 {{ partial "header.html" . }}
-
+{{- partial "sidebar.html" . }}
+<div id="content">
 <h1>{{ .Title }}</h1>
 {{ .Content }}
 {{ range .Paginator.Pages  }}
@@ -8,5 +9,6 @@
   {{- partial "tags.html" . }}
 </p>
 {{ end }}
+</div>
 
 {{ partial "footer.html" . }}

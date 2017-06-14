@@ -1,6 +1,9 @@
 {{ partial "header.html" . }}
 
-<h1>{{ .Title }}</h1>
+{{- partial "sidebar.html" . }}
+
+<div id="content">
+<h1 class="title">{{ .Title }}</h1>
 {{- .Date.Format "2006/01/02" }}
 {{- partial "tags.html" . }}
 
@@ -19,5 +22,6 @@
 </div>
 {{ end }}
 {{ template "_internal/disqus.html" . }}
+</div>
 
 {{ partial "footer.html" . }}
