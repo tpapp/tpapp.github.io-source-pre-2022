@@ -1,6 +1,6 @@
 +++
 date = "2017-06-11T14:48:06+02:00"
-title = "Research"
+title = "Tamás K. Papp's website"
 +++
 
 # Tamás K. Papp
