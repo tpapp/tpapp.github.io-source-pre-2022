@@ -114,7 +114,7 @@ small, .font_small {
   /* top: 5rem; */
   /* z-index: 9998; */
   float: right;
-  width: 12rem;
+  width: 12em;
   height: 100%;
   padding: 1em; }
   #sidebar a {
