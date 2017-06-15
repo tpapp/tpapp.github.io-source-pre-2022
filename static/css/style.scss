@@ -144,7 +144,7 @@ small, .font_small {font-size: 0.833em;}
     /* top: 5rem; */
     /* z-index: 9998; */
     float: right;
-    width: 12rem;
+    width: 12em;
     height: 100%;
     padding: 1em;
     a {
@@ -158,8 +158,8 @@ small, .font_small {font-size: 0.833em;}
         color: $fadehover;
     }
     img#tamaskpapp {
-        float:left;
-        width:10em;
+        float: left;
+        width: 10em;
         margin: 1em;
     }
 }
