@@ -1,3 +1,4 @@
+/* colors: mostly gray, except link hover */
 $lightbg: #fff;
 $lightfg: #222;
 $lighthover: #5a59a5;
@@ -6,9 +7,6 @@ $fadehover: #5a59a5;
 $darkbg: #333;
 $darkfg: #eee;
 $darkhover: #8785f7;
-           
-$navbarheight: 3rem;
-$nidebarwidth: 12rem;
 
 html {
     font-size: 1em;
@@ -53,8 +51,6 @@ small, .font_small {font-size: 0.833em;}
     left: 0;
     z-index: 9999;
     width: 100%;
-    min-width: 60em;
-    height: $navbarheight;
     background-color: $darkbg;
     a {
         float: left;
@@ -69,10 +65,22 @@ small, .font_small {font-size: 0.833em;}
     }
 }
 
+#navbarplaceholder {
+    width: 100%;
+    color: transparent;
+    display: block;
+    float: top;
+    a {
+        float: left;
+        display: block;
+        text-align: center;
+        padding: 14px 16px;
+    }
+}
+
 #mainbody {
-    margin-top: $navbarheight;
-    margin-left: 0em;
-    margin-right: 0em;
+    margin: 0;
+    clear: left;
 }
 
 #content {

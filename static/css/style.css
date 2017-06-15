@@ -1,3 +1,4 @@
+/* colors: mostly gray, except link hover */
 html {
   font-size: 1em; }
 
@@ -42,8 +43,6 @@ small, .font_small {
   left: 0;
   z-index: 9999;
   width: 100%;
-  min-width: 60em;
-  height: 3rem;
   background-color: #333; }
   #navbar a {
     float: left;
@@ -55,10 +54,20 @@ small, .font_small {
   #navbar a:hover {
     color: #8785f7; }
 
+#navbarplaceholder {
+  width: 100%;
+  color: transparent;
+  display: block;
+  float: top; }
+  #navbarplaceholder a {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 14px 16px; }
+
 #mainbody {
-  margin-top: 3rem;
-  margin-left: 0em;
-  margin-right: 0em; }
+  margin: 0;
+  clear: left; }
 
 #content {
   padding: 2em;

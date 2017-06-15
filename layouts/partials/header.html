@@ -28,12 +28,9 @@
   </head>
   <body>
     <nav id="navbar">
-      <a href="{{ .Site.BaseURL }}">About</a>
-      <a href="{{ "research" | absURL }}">Research</a>
-      <a href="{{ "post" | absURL }}">Blog</a>
-      <a href="{{ "software" | absURL }}">Software</a>
-
-      <a href="https://github.com/tpapp/">Github</a>
+      {{ partial "navbar.html" . }}
     </nav>
-
+    <div id="navbarplaceholder">
+      {{ partial "navbar.html" . }}
+    </div>
     <div id="mainbody">
