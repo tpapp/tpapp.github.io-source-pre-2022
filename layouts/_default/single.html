@@ -1,9 +1,7 @@
 {{ partial "header.html" . }}
-
 {{- partial "sidebar.html" . }}
-
 <div id="content">
-<h1 class="title">{{ .Title }}</h1>
+<h1>{{ .Title }}</h1>
 {{- .Date.Format "2006/01/02" }}
 {{- partial "tags.html" . }}
 
