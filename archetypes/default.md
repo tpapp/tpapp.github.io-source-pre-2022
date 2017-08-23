@@ -1,6 +1,6 @@
 +++
-date = ""
-draft = false
+date = {{ .Date }}
+draft = true
 title = ""
 slug = ""
 categories = [""]
