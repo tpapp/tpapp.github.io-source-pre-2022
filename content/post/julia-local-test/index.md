@@ -45,8 +45,8 @@ the main file is in `src/Pkgname.jl`, while tests are in `test/runtests.jl`.
 function local_test(pkgname; coverage::Bool=false)
     module_path = Base.find_in_path(pkgname, nothing)
     src_dir, module_file = splitdir(module_path)
-    dir = 
-    test_path = joinpath(normpath(src_dir, ".."), "test", "runtests.jl")
+    dir = normpath(src_dir, "..")
+    test_path = joinpath(dir, "test", "runtests.jl")
     @assert isfile(test_path) "Could not find $(test_path)"
     Base.cd(dir) do
         try
@@ -65,3 +65,5 @@ end
 Compared to simply `include("wherever-it-is/runtests.jl")`, this has the advantage of running a separate Julia process, so your workspace does not contaminate the test environment and in case of segfaults, the parent process won't be affected.
 
 Hopefully, the code above will be obsolete once [Pkg3](https://github.com/StefanKarpinski/Pkg3.jl) is released, but until then it is a useful workaround.
+
+**edit**: function above was corrupted during copy-paste, corrected.
