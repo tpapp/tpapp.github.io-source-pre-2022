@@ -105,6 +105,16 @@ small, .font_small {
       font-size: 1em;
       font-style: italic;
       font-weight: 300; }
+  #content .getcode {
+    background-color: #333;
+    color: #eee;
+    width: 100%;
+    font-size: 0.833em; }
+    #content .getcode p {
+      text-align: center; }
+    #content .getcode a, #content .getcode a:hover {
+      background-color: #333;
+      color: #eee; }
 
 #sidebar {
   /* position: fixed; */

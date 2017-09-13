@@ -135,6 +135,17 @@ small, .font_small {font-size: 0.833em;}
             }
         }
     }
+    .getcode {
+        background-color: $darkbg;
+        color: $darkfg;
+        width: 100%;
+        font-size: 0.833em;
+        p { text-align: center; }
+        a, a:hover {
+            background-color: $darkbg;
+            color: $darkfg;
+        }
+    }
 }
 
 #sidebar {

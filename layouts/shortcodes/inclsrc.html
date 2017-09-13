@@ -1,0 +1,5 @@
+{{ $file_param := (.Get 1) }}
+{{ $file := (printf "%s%s" $.Page.File.Dir $file_param) }}
+{{ highlight (readFile (printf "content/%s" $file)) (.Get 0) ""}}
+<div class="getcode"><p>(download the above as <a href="{{ absURL $file }}">{{ $file_param }}</a>)</div>
+

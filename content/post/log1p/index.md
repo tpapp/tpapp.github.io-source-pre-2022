@@ -37,4 +37,4 @@ The next plot confirms this.
 
 Code is available below.
 
-{{< gist tpapp 3d7272cae2574d413991dc4648fcda6e >}}
+{{< inclsrc "julia" "code.jl" >}}
