@@ -7,6 +7,8 @@ categories = [""]
 tags = ["julia", "log1p", "numerical error"]
 +++
 
+*edit*: fixed bogus interaction of MathJax and code highlighting.
+
 This is a follow-up on a [question](https://discourse.julialang.org/t/log1p-in-base-vs-base-math-julialibm/5852) I asked on the Julia forums about calculating
 \[
 \text{log1p}(x) = \log(1+x)
@@ -25,7 +27,7 @@ The graph below shows the base-2 logarithm of the *relative* error for `Base.log
 
 <img src="Base_log1p_error.svg" style="width:40em">
 
-The next plot shows the relative accuracy of the relative error above, comparing `Base.Math.JuliaLibm.log1p` to `Base.log1p` (lower values better). In these simulations, `Base.Math.JuliaLibm.log1p` is never worse, but sometimes significantly better (resulting in an extra digit of accuracy). This matters especially when $x \approx 0$. 
+The next plot shows the relative accuracy of the relative error above, comparing `Base.Math.JuliaLibm.log1p` to `Base.log1p` (lower values better). In these simulations, `Base.Math.JuliaLibm.log1p` is never worse, but sometimes significantly better (resulting in an extra binary digit of accuracy). This matters especially when $x \approx 0$.
 
 <img src="JuliaLibm_improvement.svg" style="width:40em">
 
