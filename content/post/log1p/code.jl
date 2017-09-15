@@ -33,3 +33,19 @@ scatter(log2.(z), last.(es), xlab = "log2(x+1)",
         ylab = "log2 error of Base.Math.JuliaLibm.log1p", legend = false)
 hline!(log2(eps())-[0,1])
 Plots.svg("JuliaLibm_log1p_error.svg")
+
+######################################################################
+# WARNING: these run for a very long time
+######################################################################
+using BenchmarkTools
+
+z = exp.(vcat(randn(200)*10, rand(200)*0.1)) # z > 0, more values around 
+x = z .- 1                                   # x > -1
+b1 = [@belapsed log1p($x) for x in x]        # WARNING: takes forever
+b2 = [@belapsed Base.Math.JuliaLibm.log1p($x) for x in x] # ditto
+
+scatter(log2.(z), b2 ./ b1, xlab = "log2(x+1)",
+        ylab = "time Math.JuliaLibm.log1p / log1p", legend = false, yticks = 0:0.2:1.2)
+hline!([1])
+Plots.svg("relative_time.svg")
+
