@@ -36,10 +36,15 @@ small, .font_small {
 
 #smallscreenwarning {
   display: none; }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 40em) {
     #smallscreenwarning {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 9998;
+      width: 100%;
       display: block;
-      background-color: #f00;
+      background-color: #b22222;
       color: #fff;
       text-align: center;
       float: clear; } }
@@ -81,7 +86,11 @@ small, .font_small {
   padding-left: 8em;
   padding-right: 2em;
   max-width: 50em; }
-  @media screen and (max-width: 600px) {
+  @media screen and (min-width: 40em) and (max-width: 50em) {
+    #content {
+      padding-left: 1em;
+      padding-right: 1em; } }
+  @media screen and (max-width: 40em) {
     #content {
       padding-left: 1em;
       padding-right: 1em; } }
@@ -109,16 +118,20 @@ small, .font_small {
   #content figure {
     padding: 0;
     margin: 0; }
-    #content figure img {
-      width: 100%;
-      padding: 0;
-      margin: 0; }
     #content figure figcaption h4 {
       padding: 0;
       margin: 0em 0em 2em 0em;
       font-size: 1em;
       font-style: italic;
       font-weight: 300; }
+  #content img {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0; }
+    @media screen and (min-width: 50em) {
+      #content img {
+        width: 40em; } }
   #content .getcode {
     background-color: #333;
     color: #eee;

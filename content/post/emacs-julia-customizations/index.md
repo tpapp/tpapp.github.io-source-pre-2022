@@ -33,7 +33,7 @@ this:
 
 This is what it looks like:
 
-<img src="todo.png" style="height:6em">
+<img src="todo.png" style="width:auto; height:6em">
 
 ## Highlight symbols
 
@@ -49,7 +49,7 @@ add a hook for
 ```
 This highlights symbols with `C-c s`:
 
-<img src="highlight.png" style="height:12em">
+<img src="highlight.png" style="width:auto; height:12em">
 
 ## Fill docstrings
 
@@ -106,7 +106,7 @@ I also use `whitespace` globally:
 
 This is what it looks like:
 
-<img src="longlines.png" style="height:4em">
+<img src="longlines.png" style="width:auto; height:4em">
 
 ## Hungry delete-mode
 
