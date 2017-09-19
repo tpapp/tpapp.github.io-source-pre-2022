@@ -8,7 +8,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #fff;
-  font-family: 'Raleway', serif;
+  font-family: 'Merriweather', serif;
   font-weight: 400;
   line-height: 1.40;
   color: #333; }
@@ -46,8 +46,7 @@ small, .font_small {
       display: block;
       background-color: #b22222;
       color: #fff;
-      text-align: center;
-      float: clear; } }
+      text-align: center; } }
 
 #navbar {
   position: fixed;
@@ -81,7 +80,8 @@ small, .font_small {
       display: none;
       position: absolute;
       background-color: #fff;
-      min-width: 20em;
+      width: 30em;
+      max-width: calc(100vw - 1em);
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       right: 0;
       z-index: 1; }
