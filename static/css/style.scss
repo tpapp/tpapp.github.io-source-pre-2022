@@ -8,6 +8,14 @@ $darkbg: #333;
 $darkfg: #eee;
 $darkhover: #8785f7;
 
+$desktop-width: 600px;
+
+@mixin small_screen {
+  @media screen and (max-width: $desktop-width) {
+    @content;
+  }
+}
+
 html {
     font-size: 1em;
 }
@@ -42,6 +50,17 @@ h3 {font-size: 1.322em;}
 h4 {font-size: 1.15em;}
 
 small, .font_small {font-size: 0.833em;}
+
+#smallscreenwarning {
+    display: none;
+    @include small_screen {
+        display: block;
+        background-color: #f00;
+        color: #fff;
+        text-align: center;
+        float: clear;
+    }
+}
 
 #navbar {
     position: fixed;
@@ -86,6 +105,10 @@ small, .font_small {font-size: 0.833em;}
     padding-left: 8em;
     padding-right: 2em;
     max-width: 50em;
+    @include small_screen {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
     p {
         text-align: justify;
     }

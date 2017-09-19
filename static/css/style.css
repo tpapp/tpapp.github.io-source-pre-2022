@@ -34,6 +34,16 @@ h4 {
 small, .font_small {
   font-size: 0.833em; }
 
+#smallscreenwarning {
+  display: none; }
+  @media screen and (max-width: 600px) {
+    #smallscreenwarning {
+      display: block;
+      background-color: #f00;
+      color: #fff;
+      text-align: center;
+      float: clear; } }
+
 #navbar {
   position: fixed;
   top: 0;
@@ -71,6 +81,10 @@ small, .font_small {
   padding-left: 8em;
   padding-right: 2em;
   max-width: 50em; }
+  @media screen and (max-width: 600px) {
+    #content {
+      padding-left: 1em;
+      padding-right: 1em; } }
   #content p {
     text-align: justify; }
   #content a {
