@@ -100,6 +100,40 @@ small, .font_small {font-size: 0.833em;}
     a:hover {
         color: $darkhover;
     }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        float: right;
+        p.dropdown-button {
+            display: block;
+            color: $darkfg;
+            text-align: center;
+            margin: 0;
+            padding: 14px 16px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: $lightbg;
+            min-width: 20em;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            right: 0;
+            z-index: 1;
+            a {
+                display: block;
+                padding: 0.5ex;
+                color: $lightfg;
+            }
+            a:hover {
+                color: $lighthover;
+            }
+        }
+    }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
 }
 
 #navbarplaceholder {
@@ -112,6 +146,15 @@ small, .font_small {font-size: 0.833em;}
         display: block;
         text-align: center;
         padding: 14px 16px;
+    }
+    p.dropdown-button {
+        float: right;
+        display: block;
+        text-align: center;
+        margin: 0;
+        padding: 14px 16px;
+        text-decoration: none;
+        cursor: pointer;
     }
 }
 
@@ -200,6 +243,16 @@ small, .font_small {font-size: 0.833em;}
             color: $darkfg;
         }
     }
+    ul.mainlist {
+        list-style-type: none;
+        padding-left: 0;
+        text-align: left;
+        p.additionalinfo {
+            padding-top: 0;
+            margin-top: 0;
+            font-size: 0.833em;
+        }
+    }
 }
 
 #sidebar {
@@ -230,5 +283,5 @@ small, .font_small {font-size: 0.833em;}
 }
 
 .date {
-    font-style: italic;
+    color: $fadefg;
 }

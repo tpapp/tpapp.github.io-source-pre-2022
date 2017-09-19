@@ -3,3 +3,13 @@
 <a href="{{ "post" | absURL }}">Blog</a>
 <a href="{{ "software" | absURL }}">Software</a>
 <a href="https://github.com/tpapp/">Github</a>
+<div class="dropdown">
+  <p class="dropdown-button">(site tags)</p>
+  {{ if not ($.Scratch.Get "nonavbartags") }}
+  <div class="dropdown-content">
+      {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+      <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}">{{ $name }}</a>
+      {{ end }}
+  </div>
+  {{ end }}
+</div>
