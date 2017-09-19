@@ -102,6 +102,8 @@ small, .font_small {
     text-decoration-color: #aaa; }
   #content a:hover {
     color: #5a59a5; }
+  #content .highlight {
+    min-width: 38em; }
   #content pre {
     margin: 0.5em;
     font-family: 'Roboto Mono', monospace; }

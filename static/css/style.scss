@@ -10,7 +10,8 @@ $darkhover: #8785f7;
 
 $content_width: 50em;
 
-$small_screen_width: 40em;
+$highlight_width: 38em;
+$small_screen_width: $highlight_width + 2em;
 $medium_screen_width: $content_width;
 
 @mixin small_screen {
@@ -142,6 +143,9 @@ small, .font_small {font-size: 0.833em;}
     }
     a:hover {
         color: $lighthover;
+    }
+    .highlight {
+        min-width: $highlight_width;
     }
     pre {
         margin: 0.5em;
