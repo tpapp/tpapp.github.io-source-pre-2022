@@ -63,7 +63,7 @@ small, .font_small {
     padding: 14px 16px;
     text-decoration: none; }
   #navbar a:hover {
-    color: #8785f7; }
+    color: #4682b4; }
   #navbar .dropdown {
     position: relative;
     display: inline-block;
@@ -76,21 +76,24 @@ small, .font_small {
       padding: 14px 16px;
       text-decoration: none;
       cursor: pointer; }
+    #navbar .dropdown p.dropdown-button:hover {
+      color: #4682b4; }
     #navbar .dropdown .dropdown-content {
       display: none;
       position: absolute;
       background-color: #fff;
       width: 30em;
       max-width: calc(100vw - 1em);
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       right: 0;
       z-index: 1; }
       #navbar .dropdown .dropdown-content a {
         display: block;
-        padding: 0.5ex;
-        color: #222; }
+        padding: 0.2ex;
+        margin: 0.2ex;
+        color: #222;
+        border: 1px solid #aaa; }
       #navbar .dropdown .dropdown-content a:hover {
-        color: #5a59a5; }
+        color: #4682b4; }
   #navbar .dropdown:hover .dropdown-content {
     display: block; }
 
@@ -137,7 +140,7 @@ small, .font_small {
     text-decoration: underline;
     text-decoration-color: #aaa; }
   #content a:hover {
-    color: #5a59a5; }
+    color: #4682b4; }
   #content .tags {
     overflow: hidden; }
     #content .tags a {
@@ -145,7 +148,7 @@ small, .font_small {
       color: #aaa;
       padding: 0; }
     #content .tags a:hover {
-      color: #5a59a5; }
+      color: #4682b4; }
   #content #pagenav .pagenav-label {
     color: #aaa; }
   #content figure {
@@ -209,7 +212,7 @@ small, .font_small {
     margin: 1px;
     text-decoration: none; }
   #sidebar a:hover {
-    color: #5a59a5; }
+    color: #4682b4; }
   #sidebar img#tamaskpapp {
     float: left;
     width: 10em;

@@ -6,6 +6,7 @@ disqusShortname = "tpappgithubio"
 Copyright = "Copyright 2017, Tamás K. Papp. [CC-BY-SA](https://creativecommons.org/licenses/by-sa/4.0/legalcode)."
 pygmentsUseClasses = true
 PygmentsCodeFences = true
+preserveTaxonomyNames = true
 
 [author]
         name = "Tamás K. Papp"

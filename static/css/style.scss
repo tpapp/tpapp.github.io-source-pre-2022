@@ -1,12 +1,12 @@
 /* colors: mostly gray, except link hover */
 $lightbg: #fff;
 $lightfg: #222;
-$lighthover: #5a59a5;
+$lighthover: #4682b4;
 $fadefg: #aaa;
-$fadehover: #5a59a5;
+$fadehover: #4682b4;
 $darkbg: #333;
 $darkfg: #eee;
-$darkhover: #8785f7;
+$darkhover: #4682b4;
 
 $content_width: 50em;
 
@@ -111,19 +111,23 @@ small, .font_small {font-size: 0.833em;}
             text-decoration: none;
             cursor: pointer;
         }
+        p.dropdown-button:hover {
+            color: $darkhover;
+        }
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: $lightbg;
             width: 30em;
             max-width: calc(100vw - 1em);
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             right: 0;
             z-index: 1;
             a {
                 display: block;
-                padding: 0.5ex;
+                padding: 0.2ex;
+                margin: 0.2ex;
                 color: $lightfg;
+                border: 1px solid $fadefg;
             }
             a:hover {
                 color: $lighthover;
