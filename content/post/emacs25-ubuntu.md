@@ -3,7 +3,7 @@ categories = [""]
 date = "2017-07-03T10:49:56+02:00"
 draft = false
 slug = ""
-tags = ["emacs emacs25 Ubuntu"]
+tags = ["emacs", "emacs25", "Ubuntu"]
 title = "Emacs 25.2 on Ubuntu"
 +++
 
