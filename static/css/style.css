@@ -91,7 +91,7 @@ small, .font_small {
         padding: 0.2ex;
         margin: 0.2ex;
         color: #222;
-        border: 1px solid #aaa; }
+        border: 0.5px solid #aaa; }
       #navbar .dropdown .dropdown-content a:hover {
         color: #4682b4; }
   #navbar .dropdown:hover .dropdown-content {
