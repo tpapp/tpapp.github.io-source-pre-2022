@@ -3,6 +3,7 @@
   <head>
     <title>{{ .Title }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ .Hugo.Generator }}
     <link rel="stylesheet" type="text/css" href="{{ "/css/style.css" | relURL }}">
     <link rel="stylesheet" type="text/css" href="{{ "/css/lovelace.css" | relURL }}">
@@ -12,6 +13,10 @@
     {{ end }}
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
+      });
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [['$','$'], ['\\(','\\)']],
           displayMath: [['$$','$$'], ['\[','\]']],
@@ -19,8 +24,11 @@
           processEnvironments: true,
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
           TeX: { equationNumbers: { autoNumber: "AMS" },
-               extensions: ["AMSmath.js", "AMSsymbols.js"] }
-        }
+          extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          },
+        CommonHTML: { linebreaks: { automatic: true } },
+        "HTML-CSS": { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
       });
     </script>
     <script type="text/javascript" async

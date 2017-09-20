@@ -76,7 +76,8 @@ small, .font_small {font-size: 0.833em;}
         display: block;
         background-color: #b22222;
         color: #fff;
-        text-align: center;
+        text-align: left;
+        padding: 0 0.5em;
     }
 }
 
@@ -168,16 +169,18 @@ small, .font_small {font-size: 0.833em;}
 
 #content {
     padding-top: 1em;
-    padding-left: 8em;
-    padding-right: 2em;
-    max-width: $content_width;
+    max-width: 60%;
+    padding-left: 10%;
+    padding-right: 30%;
     @include medium_screen {
-        padding-left: 1em;
-        padding-right: 1em;
+        max-width: 80%;
+        padding-left: 10%;
+        padding-right: 10%;
     }
     @include small_screen {
-        padding-left: 1em;
-        padding-right: 1em;
+        max-width: calc(100% - 1em);
+        padding-left: 0.5em;
+        padding-right: 0.5em;
     }
     p {
         text-align: justify;

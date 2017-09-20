@@ -46,7 +46,8 @@ small, .font_small {
       display: block;
       background-color: #b22222;
       color: #fff;
-      text-align: center; } }
+      text-align: left;
+      padding: 0 0.5em; } }
 
 #navbar {
   position: fixed;
@@ -122,17 +123,19 @@ small, .font_small {
 
 #content {
   padding-top: 1em;
-  padding-left: 8em;
-  padding-right: 2em;
-  max-width: 50em; }
+  max-width: 60%;
+  padding-left: 10%;
+  padding-right: 30%; }
   @media screen and (min-width: 40em) and (max-width: 50em) {
     #content {
-      padding-left: 1em;
-      padding-right: 1em; } }
+      max-width: 80%;
+      padding-left: 10%;
+      padding-right: 10%; } }
   @media screen and (max-width: 40em) {
     #content {
-      padding-left: 1em;
-      padding-right: 1em; } }
+      max-width: calc(100% - 1em);
+      padding-left: 0.5em;
+      padding-right: 0.5em; } }
   #content p {
     text-align: justify; }
   #content a {
