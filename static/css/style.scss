@@ -10,8 +10,7 @@ $darkhover: #8785f7;
 
 $content_width: 50em;
 
-$highlight_width: 38em;
-$small_screen_width: $highlight_width + 2em;
+$small_screen_width: 40em;
 $medium_screen_width: $content_width;
 
 @mixin small_screen {
@@ -187,13 +186,6 @@ small, .font_small {font-size: 0.833em;}
     a:hover {
         color: $lighthover;
     }
-    .highlight {
-        min-width: $highlight_width;
-    }
-    pre {
-        margin: 0.5em;
-        font-family: 'Roboto Mono', monospace;
-    }
     .tags {
         overflow: hidden;
         a {
@@ -232,16 +224,27 @@ small, .font_small {font-size: 0.833em;}
         padding: 0;
         margin: 0;
     }
-    .getcode {
+    .codeheader {
         background-color: $darkbg;
         color: $darkfg;
         width: 100%;
+        border-radius: 0.4em 0.4em 0 0;
         font-size: 0.833em;
-        p { text-align: center; }
-        a, a:hover {
-            background-color: $darkbg;
-            color: $darkfg;
+        p {
+            text-align: center;
+            padding: 3px 8px;
+            margin: 0;
+            a, a:hover {
+                background-color: $darkbg;
+                color: $darkfg;
+            }
         }
+    }
+    pre {
+        margin: 0;
+        padding: 3px 8px;
+        font-family: 'Roboto Mono', monospace;
+        overflow: auto;
     }
     ul.mainlist {
         list-style-type: none;

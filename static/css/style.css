@@ -138,11 +138,6 @@ small, .font_small {
     text-decoration-color: #aaa; }
   #content a:hover {
     color: #5a59a5; }
-  #content .highlight {
-    min-width: 38em; }
-  #content pre {
-    margin: 0.5em;
-    font-family: 'Roboto Mono', monospace; }
   #content .tags {
     overflow: hidden; }
     #content .tags a {
@@ -170,16 +165,24 @@ small, .font_small {
     @media screen and (min-width: 50em) {
       #content img {
         width: 40em; } }
-  #content .getcode {
+  #content .codeheader {
     background-color: #333;
     color: #eee;
     width: 100%;
+    border-radius: 0.4em 0.4em 0 0;
     font-size: 0.833em; }
-    #content .getcode p {
-      text-align: center; }
-    #content .getcode a, #content .getcode a:hover {
-      background-color: #333;
-      color: #eee; }
+    #content .codeheader p {
+      text-align: center;
+      padding: 3px 8px;
+      margin: 0; }
+      #content .codeheader p a, #content .codeheader p a:hover {
+        background-color: #333;
+        color: #eee; }
+  #content pre {
+    margin: 0;
+    padding: 3px 8px;
+    font-family: 'Roboto Mono', monospace;
+    overflow: auto; }
   #content ul.mainlist {
     list-style-type: none;
     padding-left: 0;

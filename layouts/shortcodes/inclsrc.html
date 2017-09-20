@@ -1,4 +1,6 @@
+{{ $language := (.Get 0) }}
 {{ $file_param := (.Get 1) }}
-{{ $file := (printf "%s%s" $.Page.File.Dir $file_param) }}
-{{ highlight (readFile (printf "content/%s" $file)) (.Get 0) ""}}
-<div class="getcode"><p>(download the above as <a href="{{ absURL $file }}">{{ $file_param }}</a>)</div>
+{{ $file_path := (printf "%s%s" $.Page.File.Dir $file_param) }}
+<div class="codeheader"><p>download as <a href="{{ absURL $file_path }}">{{ $file_param }}</a></p></div>
+{{ highlight (readFile (printf "content/%s" $file_path)) $language ""}}
+
