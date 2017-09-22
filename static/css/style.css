@@ -36,7 +36,7 @@ small, .font_small {
 
 #smallscreenwarning {
   display: none; }
-  @media screen and (max-width: 50em) {
+  @media screen and (max-width: 51em) {
     #smallscreenwarning {
       position: fixed;
       bottom: 0;
@@ -102,20 +102,39 @@ small, .font_small {
   #navbar .dropdown:hover .dropdown-content {
     display: block; }
 
+#navbarplaceholder {
+  /* visibility: hidden; */
+  width: 100%;
+  text-align: center;
+  padding-bottom: 0.5em; }
+  #navbarplaceholder a {
+    display: inline-block;
+    color: #eee;
+    text-align: center;
+    margin: 0.5em 2em 0 2em;
+    text-decoration: none; }
+  #navbarplaceholder .dropdown {
+    position: relative;
+    display: inline; }
+    #navbarplaceholder .dropdown p.dropdown-button {
+      display: inline;
+      text-align: center;
+      margin: 0.5em 2em 0 2em;
+      text-decoration: none;
+      cursor: pointer; }
+    #navbarplaceholder .dropdown .dropdown-content {
+      display: none; }
+
 #mainbody {
   margin: 0;
   clear: left; }
 
 #content {
-  padding-top: 2em;
+  padding-top: 0em;
   max-width: 50em;
   padding-left: calc((100% - 50em) / 2);
   padding-right: calc((100% - 50em) / 2); }
-  @media screen and (min-width: 50em) and (max-width: 75em) {
-    #content {
-      padding-left: calc((100% - 50em) / 2);
-      padding-right: calc((100% - 50em) / 2); } }
-  @media screen and (max-width: 50em) {
+  @media screen and (max-width: 51em) {
     #content {
       max-width: calc(100% - 1em);
       padding-left: 0.5em;
@@ -149,12 +168,12 @@ small, .font_small {
       font-weight: 300; }
   #content img {
     max-width: 100%;
-    width: 100%;
+    width: 40em;
     padding: 0;
     margin: 0; }
-    @media screen and (min-width: 75em) {
+    @media screen and (max-width: 51em) {
       #content img {
-        width: 40em; } }
+        width: 100%; } }
   #content .codeheader {
     background-color: #333;
     color: #eee;
@@ -183,11 +202,6 @@ small, .font_small {
       font-size: 0.833em; }
 
 #sidebar {
-  /* position: fixed; */
-  /* display: block; */
-  /* right: 0; */
-  /* top: 5rem; */
-  /* z-index: 9998; */
   float: right;
   width: 12em;
   height: 100%;

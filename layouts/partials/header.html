@@ -36,5 +36,10 @@
     </script>
   </head>
   <body>
-    {{ partial "navbar.html" . }}
+    <nav id="navbar">
+      {{ partial "navbar.html" . }}
+    </nav>
+    <div id="navbarplaceholder">
+      {{ partial "navbar.html" . }}
+    </div>
     <div id="mainbody">
