@@ -5,7 +5,10 @@ title = "Tamás K. Papp's website"
 
 # Tamás K. Papp
 
-Researcher at the [Institute for Advanced Studies, Vienna](http://www.ihs.ac.at/research-groups/macroeconomics-and-public-finance/).
+<img id="tamaskpapp" src="./img/tamas_k_papp.jpg" alt="Tamás K. Papp">
+
+Researcher at the [Institute for Advanced Studies,
+Vienna](http://www.ihs.ac.at/research-groups/macroeconomics-and-public-finance/).
 
 ## Contact
 

@@ -8,7 +8,7 @@ $darkbg: #333;
 $darkfg: #eee;
 $darkhover: #4682b4;
 
-$content_width: 50em;
+$content_width: 45em;
 $content_padding: 8em;
 $smallscreen_padding: 0.5em;
 
@@ -84,7 +84,7 @@ small, .font_small {font-size: 0.833em;}
         display: inline-block;
         color: $darkfg;
         text-align: center;
-        margin: 0.5em 2em 0 2em;
+        margin: 0.5em 1.5em 0 1.5em;
         text-decoration: none;
     }
     a:hover {
@@ -93,16 +93,13 @@ small, .font_small {font-size: 0.833em;}
     .dropdown {
         position: relative;
         display: inline;
-        p.dropdown-button {
-            display: inline;
-            color: $darkfg;
+        a.dropdown-button {
+            display: inline-block;
+            color: $fadefg;
             text-align: center;
-            margin: 0.5em 2em 0 2em;
+            margin: 0.5em 1.5em 0 1.5em;
             text-decoration: none;
             cursor: pointer;
-        }
-        p.dropdown-button:hover {
-            color: $darkhover;
         }
         .dropdown-content {
             display: none;
@@ -111,9 +108,9 @@ small, .font_small {font-size: 0.833em;}
             background-color: $darkbg;
             padding: 0.5em;
             width: 30em;
-            max-width: calc(100vw - 1em);
+            max-width: calc(100vw - 10em);
             text-align: left;
-            right: 0;
+            right: 2em;
             top: 0;
             z-index: 1;
             a {
@@ -122,7 +119,6 @@ small, .font_small {font-size: 0.833em;}
                 margin: 0.3ex;
                 color: $lightfg;
                 background-color: $lightbg;
-                /* border: 0.5px solid $fadefg; */
             }
             a:hover {
                 color: $lighthover;
@@ -134,14 +130,14 @@ small, .font_small {font-size: 0.833em;}
     }
 }
 
+// spacer for the navbar, with the same autoflow behavior for narrow screens
 #navbarplaceholder {
-    /* visibility: hidden; */
+    visibility: hidden;
     width: 100%;
     text-align: center;
     padding-bottom: 0.5em;
     a {
         display: inline-block;
-        color: $darkfg;
         text-align: center;
         margin: 0.5em 2em 0 2em;
         text-decoration: none;
@@ -149,9 +145,6 @@ small, .font_small {font-size: 0.833em;}
     .dropdown {
         position: relative;
         display: inline;
-        a.dropdown-button {
-            cursor: pointer;
-        }
         .dropdown-content {
             display: none;
         }
@@ -255,30 +248,13 @@ small, .font_small {font-size: 0.833em;}
             font-size: 0.833em;
         }
     }
-}
-
-#sidebar {
-    float: right;
-    width: 12em;
-    height: 100%;
-    padding: 1em;
-    a {
-        font-size: 80%;
-        color: $fadefg;
-        padding: 1px;
-        margin: 1px;
-        text-decoration: none;
-    }
-    a:hover {
-        color: $fadehover;
-    }
     img#tamaskpapp {
-        float: left;
+        float: right;
         width: 10em;
         margin: 1em;
     }
+    .date {
+        color: $fadefg;
+    }
 }
 
-.date {
-    color: $fadefg;
-}
