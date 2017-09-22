@@ -116,11 +116,7 @@ small, .font_small {
   #navbarplaceholder .dropdown {
     position: relative;
     display: inline; }
-    #navbarplaceholder .dropdown p.dropdown-button {
-      display: inline;
-      text-align: center;
-      margin: 0.5em 2em 0 2em;
-      text-decoration: none;
+    #navbarplaceholder .dropdown a.dropdown-button {
       cursor: pointer; }
     #navbarplaceholder .dropdown .dropdown-content {
       display: none; }

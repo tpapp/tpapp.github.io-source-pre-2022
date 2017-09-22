@@ -3,11 +3,11 @@
 <a href="{{ "post" | absURL }}">Blog</a>
 <a href="{{ "software" | absURL }}">Software</a>
 <a href="https://github.com/tpapp/">Github</a>
-<span class="dropdown">
-  <p class="dropdown-button">(site&nbsp;tags)</a>
-<div class="dropdown-content">
-  {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-  <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}">{{ $name }}</a>
-  {{ end }}
+<div class="dropdown">
+  <a class="dropdown-button">(site&nbsp;tags)</a>
+  <div class="dropdown-content">
+    {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+    <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}">{{ $name }}</a>
+    {{ end }}
+  </div>
 </div>
-</span>

@@ -149,11 +149,7 @@ small, .font_small {font-size: 0.833em;}
     .dropdown {
         position: relative;
         display: inline;
-        p.dropdown-button {
-            display: inline;
-            text-align: center;
-            margin: 0.5em 2em 0 2em;
-            text-decoration: none;
+        a.dropdown-button {
             cursor: pointer;
         }
         .dropdown-content {
