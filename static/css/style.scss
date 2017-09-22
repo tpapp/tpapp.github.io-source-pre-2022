@@ -9,9 +9,11 @@ $darkfg: #eee;
 $darkhover: #4682b4;
 
 $content_width: 50em;
+$content_padding: 8em;
+$smallscreen_padding: 0.5em;
 
-$small_screen_width: 40em;
-$medium_screen_width: $content_width;
+$small_screen_width: $content_width;
+$medium_screen_width: $content_width + 3 * $content_padding + 2 * $smallscreen_padding;
 
 @mixin small_screen {
   @media screen and (max-width: $small_screen_width) {
@@ -88,12 +90,13 @@ small, .font_small {font-size: 0.833em;}
     z-index: 9999;
     width: 100%;
     background-color: $darkbg;
+    text-align: center;
+    padding-bottom: 0.5em;
     a {
-        float: left;
-        display: block;
+        display: inline-block;
         color: $darkfg;
         text-align: center;
-        padding: 14px 16px;
+        margin: 0.5em 2em 0 2em;
         text-decoration: none;
     }
     a:hover {
@@ -101,14 +104,12 @@ small, .font_small {font-size: 0.833em;}
     }
     .dropdown {
         position: relative;
-        display: inline-block;
-        float: right;
+        display: inline;
         p.dropdown-button {
-            display: block;
+            display: inline;
             color: $darkfg;
             text-align: center;
-            margin: 0;
-            padding: 14px 16px;
+            margin: 0.5em 2em 0 2em;
             text-decoration: none;
             cursor: pointer;
         }
@@ -117,18 +118,23 @@ small, .font_small {font-size: 0.833em;}
         }
         .dropdown-content {
             display: none;
+            opacity: 0.9;
             position: absolute;
-            background-color: $lightbg;
+            background-color: $darkbg;
+            padding: 0.5em;
             width: 30em;
             max-width: calc(100vw - 1em);
+            text-align: left;
             right: 0;
+            top: 0;
             z-index: 1;
             a {
-                display: block;
-                padding: 0.2ex;
-                margin: 0.2ex;
+                display: inline-block;
+                padding: 0.3ex;
+                margin: 0.3ex;
                 color: $lightfg;
-                border: 0.5px solid $fadefg;
+                background-color: $lightbg;
+                /* border: 0.5px solid $fadefg; */
             }
             a:hover {
                 color: $lighthover;
@@ -140,47 +146,24 @@ small, .font_small {font-size: 0.833em;}
     }
 }
 
-#navbarplaceholder {
-    width: 100%;
-    color: transparent;
-    display: block;
-    float: top;
-    a {
-        float: left;
-        display: block;
-        text-align: center;
-        padding: 14px 16px;
-    }
-    p.dropdown-button {
-        float: right;
-        display: block;
-        text-align: center;
-        margin: 0;
-        padding: 14px 16px;
-        text-decoration: none;
-        cursor: pointer;
-    }
-}
-
 #mainbody {
     margin: 0;
     clear: left;
 }
 
 #content {
-    padding-top: 1em;
-    max-width: 60%;
-    padding-left: 10%;
-    padding-right: 30%;
+    padding-top: 2em;
+    max-width: $content-width;
+    padding-left: calc((100% - #{$content_width}) / 2);
+    padding-right: calc((100% - #{$content_width}) / 2);
     @include medium_screen {
-        max-width: 80%;
-        padding-left: 10%;
-        padding-right: 10%;
+        padding-left: calc((100% - #{$content_width}) / 2);
+        padding-right: calc((100% - #{$content_width}) / 2);
     }
     @include small_screen {
         max-width: calc(100% - 1em);
-        padding-left: 0.5em;
-        padding-right: 0.5em;
+        padding-left: $smallscreen_padding;
+        padding-right: $smallscreen_padding;
     }
     p {
         text-align: justify;

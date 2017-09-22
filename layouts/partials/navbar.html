@@ -1,15 +1,15 @@
-<a href="{{ .Site.BaseURL }}">About</a>
-<a href="{{ "research" | absURL }}">Research</a>
-<a href="{{ "post" | absURL }}">Blog</a>
-<a href="{{ "software" | absURL }}">Software</a>
-<a href="https://github.com/tpapp/">Github</a>
-<div class="dropdown">
-  <p class="dropdown-button">(site tags)</p>
-  {{ if not ($.Scratch.Get "nonavbartags") }}
-  <div class="dropdown-content">
+<nav id="navbar">
+  <a href="{{ .Site.BaseURL }}">About</a>
+  <a href="{{ "research" | absURL }}">Research</a>
+  <a href="{{ "post" | absURL }}">Blog</a>
+  <a href="{{ "software" | absURL }}">Software</a>
+  <a href="https://github.com/tpapp/">Github</a>
+  <span class="dropdown">
+    <p class="dropdown-button">(site&nbsp;tags)</a>
+    <div class="dropdown-content">
       {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
       <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}">{{ $name }}</a>
       {{ end }}
-  </div>
-  {{ end }}
-</div>
+    </div>
+  </span>
+</nav>

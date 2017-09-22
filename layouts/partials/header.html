@@ -36,11 +36,5 @@
     </script>
   </head>
   <body>
-    <nav id="navbar">
-      {{ partial "navbar.html" . }}
-    </nav>
-    <div id="navbarplaceholder">
-      {{ $.Scratch.Set "nonavbartags" true }}
-      {{ partial "navbar.html" . }}
-    </div>
+    {{ partial "navbar.html" . }}
     <div id="mainbody">

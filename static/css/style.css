@@ -36,7 +36,7 @@ small, .font_small {
 
 #smallscreenwarning {
   display: none; }
-  @media screen and (max-width: 40em) {
+  @media screen and (max-width: 50em) {
     #smallscreenwarning {
       position: fixed;
       bottom: 0;
@@ -55,83 +55,67 @@ small, .font_small {
   left: 0;
   z-index: 9999;
   width: 100%;
-  background-color: #333; }
+  background-color: #333;
+  text-align: center;
+  padding-bottom: 0.5em; }
   #navbar a {
-    float: left;
-    display: block;
+    display: inline-block;
     color: #eee;
     text-align: center;
-    padding: 14px 16px;
+    margin: 0.5em 2em 0 2em;
     text-decoration: none; }
   #navbar a:hover {
     color: #4682b4; }
   #navbar .dropdown {
     position: relative;
-    display: inline-block;
-    float: right; }
+    display: inline; }
     #navbar .dropdown p.dropdown-button {
-      display: block;
+      display: inline;
       color: #eee;
       text-align: center;
-      margin: 0;
-      padding: 14px 16px;
+      margin: 0.5em 2em 0 2em;
       text-decoration: none;
       cursor: pointer; }
     #navbar .dropdown p.dropdown-button:hover {
       color: #4682b4; }
     #navbar .dropdown .dropdown-content {
       display: none;
+      opacity: 0.9;
       position: absolute;
-      background-color: #fff;
+      background-color: #333;
+      padding: 0.5em;
       width: 30em;
       max-width: calc(100vw - 1em);
+      text-align: left;
       right: 0;
+      top: 0;
       z-index: 1; }
       #navbar .dropdown .dropdown-content a {
-        display: block;
-        padding: 0.2ex;
-        margin: 0.2ex;
+        display: inline-block;
+        padding: 0.3ex;
+        margin: 0.3ex;
         color: #222;
-        border: 0.5px solid #aaa; }
+        background-color: #fff;
+        /* border: 0.5px solid $fadefg; */ }
       #navbar .dropdown .dropdown-content a:hover {
         color: #4682b4; }
   #navbar .dropdown:hover .dropdown-content {
     display: block; }
-
-#navbarplaceholder {
-  width: 100%;
-  color: transparent;
-  display: block;
-  float: top; }
-  #navbarplaceholder a {
-    float: left;
-    display: block;
-    text-align: center;
-    padding: 14px 16px; }
-  #navbarplaceholder p.dropdown-button {
-    float: right;
-    display: block;
-    text-align: center;
-    margin: 0;
-    padding: 14px 16px;
-    text-decoration: none;
-    cursor: pointer; }
 
 #mainbody {
   margin: 0;
   clear: left; }
 
 #content {
-  padding-top: 1em;
-  max-width: 60%;
-  padding-left: 10%;
-  padding-right: 30%; }
-  @media screen and (min-width: 40em) and (max-width: 50em) {
+  padding-top: 2em;
+  max-width: 50em;
+  padding-left: calc((100% - 50em) / 2);
+  padding-right: calc((100% - 50em) / 2); }
+  @media screen and (min-width: 50em) and (max-width: 75em) {
     #content {
-      max-width: 80%;
-      padding-left: 10%;
-      padding-right: 10%; } }
-  @media screen and (max-width: 40em) {
+      padding-left: calc((100% - 50em) / 2);
+      padding-right: calc((100% - 50em) / 2); } }
+  @media screen and (max-width: 50em) {
     #content {
       max-width: calc(100% - 1em);
       padding-left: 0.5em;
@@ -168,7 +152,7 @@ small, .font_small {
     width: 100%;
     padding: 0;
     margin: 0; }
-    @media screen and (min-width: 50em) {
+    @media screen and (min-width: 75em) {
       #content img {
         width: 40em; } }
   #content .codeheader {
