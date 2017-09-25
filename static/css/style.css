@@ -151,7 +151,8 @@ small, .font_small {
       color: #aaa; }
   #content figure {
     padding: 0;
-    margin: 0; }
+    margin: 0;
+    text-align: center; }
     #content figure figcaption h4 {
       padding: 0;
       margin: 0em 0em 2em 0em;
@@ -159,10 +160,11 @@ small, .font_small {
       font-style: italic;
       font-weight: 300; }
   #content img {
+    display: block;
     max-width: 100%;
     width: 36em;
     padding: 0;
-    margin: 0; }
+    margin: 0 auto; }
     @media screen and (max-width: 46em) {
       #content img {
         width: 100%; } }

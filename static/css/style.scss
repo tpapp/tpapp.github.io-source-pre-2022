@@ -198,6 +198,7 @@ small, .font_small {font-size: 0.833em;}
     figure {
         padding: 0;
         margin: 0;
+        text-align: center;
         figcaption {
             h4 {
                 padding: 0;
@@ -209,6 +210,7 @@ small, .font_small {font-size: 0.833em;}
         }
     }
     img {
+        display: block;
         max-width: 100%;
         width: 0.8 * $content_width;
         @include small_screen {
@@ -216,7 +218,7 @@ small, .font_small {font-size: 0.833em;}
 
         }
         padding: 0;
-        margin: 0;
+        margin: 0 auto;
     }
     .codeheader {
         background-color: $darkbg;
