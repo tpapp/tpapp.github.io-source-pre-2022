@@ -4,8 +4,11 @@
 <a href="{{ "software" | absURL }}">Software</a>
 <a href="https://github.com/tpapp/">Github</a>
 <div class="dropdown">
-  <a class="dropdown-button">(site&nbsp;tags)</a>
+  <a class="dropdown-button">(tags)</a>
   <div class="dropdown-content">
+    <span class="dropdown-header">
+      <p>site tags</p>
+    </span>
     {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
     <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}">{{ $name }}</a>
     {{ end }}

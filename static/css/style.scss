@@ -81,6 +81,7 @@ small, .font_small {font-size: 0.833em;}
     background-color: $darkbg;
     text-align: center;
     padding-bottom: 0.5em;
+    float: right;
     a {
         display: inline-block;
         color: $darkfg;
@@ -104,14 +105,20 @@ small, .font_small {font-size: 0.833em;}
         }
         .dropdown-content {
             display: none;
-            opacity: 0.9;
             position: absolute;
-            background-color: $darkbg;
+            background-color: $fadefg;
+            color: $lightfg;
             padding: 0.5em;
-            width: 30em;
-            max-width: calc(100vw - 10em);
-            text-align: left;
-            right: 2em;
+            width: $content-width - 3em;
+            @include small_screen {
+                position: fixed;
+                left: 1em;
+                top: 0em;
+                right: 1em;
+                width: calc(100vw - 3em);
+            }
+            text-align: center;
+            right: 0;
             top: 0;
             z-index: 1;
             a {
@@ -120,9 +127,19 @@ small, .font_small {font-size: 0.833em;}
                 margin: 0.3ex;
                 color: $lightfg;
                 background-color: $lightbg;
+                border-style: solid;
+                border-width: 0.5px;
+                border-color: $fadefg;
             }
             a:hover {
                 color: $lighthover;
+            }
+            .dropdown-header {
+                color: $darkfg;
+                text-align: center;
+                p {
+                    margin: 0.5em 0 1em 0;
+                }
             }
         }
     }
