@@ -4,8 +4,9 @@ title = "Tamás K. Papp's website"
 relativeURLs = true
 disqusShortname = "tpappgithubio"
 Copyright = "Copyright 2017, Tamás K. Papp. [CC-BY-SA](https://creativecommons.org/licenses/by-sa/4.0/legalcode)."
+pygmentsStyle = "murphy"
 pygmentsUseClasses = true
-PygmentsCodeFences = true
+pygmentsCodefences = true
 preserveTaxonomyNames = true
 
 [author]

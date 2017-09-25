@@ -7,6 +7,7 @@ $fadehover: #4682b4;
 $darkbg: #333;
 $darkfg: #eee;
 $darkhover: #4682b4;
+$codebg: #f7f7f7;
 
 $content_width: 45em;
 $content_padding: 8em;
@@ -30,10 +31,10 @@ body {
     margin: 0;
     padding: 0;
     background-color: $lightbg;
+    color: $lightfg;
     font-family: 'Merriweather', serif;
     font-weight: 400;
     line-height: 1.40;
-    color: #333;
 }
 
 h1, h2, h3, h4 {
@@ -237,6 +238,7 @@ small, .font_small {font-size: 0.833em;}
         padding: 3px 8px;
         font-family: 'Roboto Mono', monospace;
         overflow: auto;
+        background-color: $codebg;
     }
     ul.mainlist {
         list-style-type: none;

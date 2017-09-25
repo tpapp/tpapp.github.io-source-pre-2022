@@ -8,10 +8,10 @@ body {
   margin: 0;
   padding: 0;
   background-color: #fff;
+  color: #222;
   font-family: 'Merriweather', serif;
   font-weight: 400;
-  line-height: 1.40;
-  color: #333; }
+  line-height: 1.40; }
 
 h1, h2, h3, h4 {
   margin: 1em 0 0.5em;
@@ -181,7 +181,8 @@ small, .font_small {
     margin: 0;
     padding: 3px 8px;
     font-family: 'Roboto Mono', monospace;
-    overflow: auto; }
+    overflow: auto;
+    background-color: #f7f7f7; }
   #content ul.mainlist {
     list-style-type: none;
     padding-left: 0;
