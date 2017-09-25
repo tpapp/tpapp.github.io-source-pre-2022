@@ -146,7 +146,7 @@ small, .font_small {
     #content .tags a:hover {
       color: #4682b4; }
   #content #pagenav {
-    margin: 1em; }
+    margin: 1em 0; }
     #content #pagenav .pagenav-label {
       color: #aaa; }
   #content figure {
