@@ -5,12 +5,13 @@ into blog posts using Hugo.  Feel free to use for your own setup.
 
 ## Prerequisites
 
-1. [Hugo](https://gohugo.io/). Try to get at least `0.19`.
-2. A working [Julia]() installation, at least `v0.5`.
-3. Recent [Weave.jl](https://github.com/mpastell/Weave.jl/).
+1. [Hugo](https://gohugo.io/), at least version `0.28`.
+2. A working [Julia](https://julialang.org/) installation, at least `v0.6`.
 
 ## How to use
 
-For posts which do not need to be woven, use Hugo according to the manual.
+See the site source and the Hugo manual for examples. The only shortcode I added is `inclsrc`, use it as
 
-For posts which you want to weave, use `new-jmd` to create, they will end up in `julia-src/`. Then call `jweave` with the filename for weaving.
+```hugo
+{{< inclsrc "julia" "code.jl" >}}
+```
