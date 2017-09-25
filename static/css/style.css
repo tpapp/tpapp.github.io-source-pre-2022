@@ -145,8 +145,10 @@ small, .font_small {
       padding: 0; }
     #content .tags a:hover {
       color: #4682b4; }
-  #content #pagenav .pagenav-label {
-    color: #aaa; }
+  #content #pagenav {
+    margin: 1em; }
+    #content #pagenav .pagenav-label {
+      color: #aaa; }
   #content figure {
     padding: 0;
     margin: 0; }

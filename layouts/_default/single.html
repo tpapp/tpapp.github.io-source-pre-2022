@@ -8,13 +8,16 @@
 
 {{ if or .Prev .Next }}
 <div id="pagenav">
-  {{ if .Next }}
-  <span class="pagenav-label">Previous</span>
-  <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
-  {{ end }}
   {{ if .Prev }}
-  <span class="pagenav-label">Next</span>
+  <span class="pagenav-label">next:</span>&nbsp;
   <a href="{{ .Prev.Permalink }}">{{ .Prev.Title }}</a>
+  {{ end }}
+  {{ if .Next }}
+  {{ if .Prev }}
+  <br/>
+  {{ end }}
+  <span class="pagenav-label">previous:</span>&nbsp;
+  <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
   {{ end }}
 </div>
 {{ end }}
