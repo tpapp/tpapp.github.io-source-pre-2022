@@ -65,6 +65,9 @@ small, .font_small {
     text-align: center;
     margin: 0.5em 1.5em 0 1.5em;
     text-decoration: none; }
+    #navbar a img.feedicon {
+      height: 1em;
+      vertical-align: -0.1em; }
   #navbar a:hover {
     color: #4682b4; }
   #navbar .dropdown {
@@ -124,6 +127,9 @@ small, .font_small {
     text-align: center;
     margin: 0.5em 2em 0 2em;
     text-decoration: none; }
+    #navbarplaceholder a img.feedicon {
+      height: 1em;
+      vertical-align: -0.1em; }
   #navbarplaceholder .dropdown {
     position: relative;
     display: inline; }

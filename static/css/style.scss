@@ -88,6 +88,10 @@ small, .font_small {font-size: 0.833em;}
         text-align: center;
         margin: 0.5em 1.5em 0 1.5em;
         text-decoration: none;
+        img.feedicon {
+            height: 1em;
+            vertical-align: -0.1em;
+        }
     }
     a:hover {
         color: $darkhover;
@@ -159,6 +163,10 @@ small, .font_small {font-size: 0.833em;}
         text-align: center;
         margin: 0.5em 2em 0 2em;
         text-decoration: none;
+        img.feedicon {
+            height: 1em;
+            vertical-align: -0.1em;
+        }
     }
     .dropdown {
         position: relative;
