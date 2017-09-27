@@ -9,7 +9,7 @@ body {
   padding: 0;
   background-color: #fff;
   color: #222;
-  font-family: 'Merriweather', serif;
+  font-family: 'Crimson Text', serif;
   font-weight: 400;
   line-height: 1.40; }
 
@@ -205,7 +205,7 @@ small, .font_small {
   #content pre {
     margin: 0;
     padding: 3px 8px;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Fira Mono', monospace;
     overflow: auto;
     background-color: #f7f7f7; }
   #content ul.mainlist {
