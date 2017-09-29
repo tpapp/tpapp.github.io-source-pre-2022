@@ -178,8 +178,7 @@ small, .font_small {
       padding: 0;
       margin: 0em 0em 2em 0em;
       font-size: 1em;
-      font-style: italic;
-      font-weight: 300; }
+      font-style: italic; }
   #content img {
     display: block;
     max-width: 100%;
@@ -206,8 +205,12 @@ small, .font_small {
     margin: 0;
     padding: 3px 8px;
     font-family: 'Fira Mono', monospace;
+    font-size: 0.8em;
     overflow: auto;
     background-color: #f7f7f7; }
+    #content pre code {
+      font-family: 'Fira Mono', monospace;
+      font-size: inherit; }
   #content ul.mainlist {
     list-style-type: none;
     padding-left: 0;

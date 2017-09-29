@@ -33,7 +33,13 @@ this:
 
 This is what it looks like:
 
-<img src="todo.png" style="width:auto; height:6em">
+<pre style="color: #262626; background-color: #ded6c5;">
+            chklapackerror<span style="color: #262626;">(</span>info<span style="color: #262626;">[])</span>
+            <span style="color: #2020cc; font-weight: bold;">if</span> any<span style="color: #262626;">(</span>ifail .!= 0<span style="color: #262626;">)</span>
+                <span style="color: #008b45;"># </span><span style="color: #f71010; font-weight: bold;">TODO</span><span style="color: #008b45;">: better error message / type
+</span>                error<span style="color: #262626;">(</span><span style="color: #fa5151;">"failed to converge eigenvectors:\n$(nonzeros(ifail))"</span><span style="color: #262626;">)</span>
+            <span style="color: #2020cc; font-weight: bold;">end</span>
+</pre>
 
 ## Highlight symbols
 
@@ -49,7 +55,20 @@ add a hook for
 ```
 This highlights symbols with `C-c s`:
 
-<img src="highlight.png" style="width:auto; height:12em">
+<pre style="color: #262626; background-color: #ded6c5;">
+<span style="color: #2020cc; font-weight: bold;">function</span> <span style="color: #2c53ca;">issymmetric</span><span style="color: #262626;">(</span><span style="color: #000000; background-color: #ffff00;">A</span><span style="color: #262626; background-color: #ded6c5;">::</span><span style="color: #9400d3;">AbstractMatrix</span><span style="color: #262626;">)</span>
+    indsm, indsn = indices<span style="color: #262626;">(</span><span style="color: #000000; background-color: #ffff00;">A</span><span style="color: #262626;">)</span>
+    <span style="color: #2020cc; font-weight: bold;">if</span> indsm != indsn
+        <span style="color: #2020cc; font-weight: bold;">return</span> <span style="color: #259ea2;">false</span>
+    <span style="color: #2020cc; font-weight: bold;">end</span>
+    <span style="color: #2020cc; font-weight: bold;">for</span> i = first<span style="color: #262626;">(</span>indsn<span style="color: #262626;">)</span>:last<span style="color: #262626;">(</span>indsn<span style="color: #262626;">)</span>, j = <span style="color: #262626;">(</span>i<span style="color: #262626;">)</span>:last<span style="color: #262626;">(</span>indsn<span style="color: #262626;">)</span>
+        <span style="color: #2020cc; font-weight: bold;">if</span> <span style="color: #000000; background-color: #ffff00;">A</span><span style="color: #262626;">[</span>i,j<span style="color: #262626;">]</span> != transpose<span style="color: #262626;">(</span><span style="color: #000000; background-color: #ffff00;">A</span><span style="color: #262626;">[</span>j,i<span style="color: #262626;">])</span>
+            <span style="color: #2020cc; font-weight: bold;">return</span> <span style="color: #259ea2;">false</span>
+        <span style="color: #2020cc; font-weight: bold;">end</span>
+    <span style="color: #2020cc; font-weight: bold;">end</span>
+    <span style="color: #2020cc; font-weight: bold;">return</span> <span style="color: #259ea2;">true</span>
+<span style="color: #2020cc; font-weight: bold;">end</span>
+</pre>
 
 ## Fill docstrings
 
@@ -106,7 +125,11 @@ I also use `whitespace` globally:
 
 This is what it looks like:
 
-<img src="longlines.png" style="width:auto; height:4em">
+<pre style="color: #262626; background-color: #ded6c5;">
+    QR<span style="color: #262626;">{</span>T,S<span style="color: #262626;">}(</span>factors<span style="color: #262626; background-color: #ded6c5;">::</span><span style="color: #9400d3;">AbstractMatrix</span><span style="color: #262626;">{</span>T<span style="color: #262626;">}</span>, &#964;<span style="color: #262626; background-color: #ded6c5;">::</span><span style="color: #9400d3;">Vector</span><span style="color: #262626;">{</span>T<span style="color: #262626;">})</span> where <span style="color: #262626;">{</span>T,S<span style="color: #262626; background-color: #ded6c5;">&lt;:</span><span style="color: #9400d3;">AbstractMatrix</span><span style="color: #262626; background-color: #f6f0e1;">}</span><span style="background-color: #f6f0e1;"> = new</span><span style="color: #262626; background-color: #f6f0e1;">(</span><span style="background-color: #f6f0e1;">factors, &#964;</span><span style="color: #262626; background-color: #f6f0e1;">)</span>
+<span style="color: #2020cc; font-weight: bold;">end</span>
+QR<span style="color: #262626;">(</span>factors<span style="color: #262626; background-color: #ded6c5;">::</span><span style="color: #9400d3;">AbstractMatrix</span><span style="color: #262626;">{</span>T<span style="color: #262626;">}</span>, &#964;<span style="color: #262626; background-color: #ded6c5;">::</span><span style="color: #9400d3;">Vector</span><span style="color: #262626;">{</span>T<span style="color: #262626;">})</span> where <span style="color: #262626;">{</span>T<span style="color: #262626;">}</span> = QR<span style="color: #262626;">{</span>T,typeof<span style="color: #262626;">(</span>factors<span style="color: #262626;">)}(</span>f<span style="background-color: #f6f0e1;">actors, &#964;</span><span style="color: #262626; background-color: #f6f0e1;">)</span>
+</pre>
 
 ## Hungry delete-mode
 
