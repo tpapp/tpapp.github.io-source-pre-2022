@@ -6,12 +6,10 @@
 <div class="dropdown">
   <a class="dropdown-button">(tags)</a>
   <div class="dropdown-content">
-    <span class="dropdown-header">
-      <p>site tags</p>
-    </span>
+    <p class="dropdown-header">site tags</p>
     {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
     <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}">{{ $name }}</a>
     {{ end }}
   </div>
 </div>
-<a href="{{ "index.xml" | absURL }}" type="application/rss+xml" target="_blank"><img class="feedicon" src="{{ "img/feed-icon.svg" | absURL }}"></a>
+<a href="{{ "index.xml" | absURL }}" type="application/rss+xml" target="_blank"><img class="feedicon" src="{{ "img/feed-icon.svg" | absURL }}" alt="Atom feed"></a>

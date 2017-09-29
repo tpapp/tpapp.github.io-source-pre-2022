@@ -109,11 +109,10 @@ small, .font_small {
         border-color: #aaa; }
       #navbar .dropdown .dropdown-content a:hover {
         color: #4682b4; }
-      #navbar .dropdown .dropdown-content .dropdown-header {
+      #navbar .dropdown .dropdown-content p .dropdown-header {
         color: #eee;
-        text-align: center; }
-        #navbar .dropdown .dropdown-content .dropdown-header p {
-          margin: 0.5em 0 1em 0; }
+        text-align: center;
+        margin: 0.5em 0 1em 0; }
   #navbar .dropdown:hover .dropdown-content {
     display: block; }
 

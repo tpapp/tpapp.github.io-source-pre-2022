@@ -138,12 +138,10 @@ small, .font_small {font-size: 0.833em;}
             a:hover {
                 color: $lighthover;
             }
-            .dropdown-header {
+            p .dropdown-header {
                 color: $darkfg;
                 text-align: center;
-                p {
-                    margin: 0.5em 0 1em 0;
-                }
+                margin: 0.5em 0 1em 0;
             }
         }
     }
