@@ -63,9 +63,9 @@ I demonstrate this with $g(x) = x$ and $x \sim \text{Normal}(\theta, 1)$, for wh
 
 Graphs below show that the approximation is reasonable --- we could make it much better with [low-discrepancy sequences](https://github.com/stevengj/Sobol.jl), but that is an orthogonal issue.
 
-![integral](integral.svg)
+{{< relimg "integral.svg" "integral" >}}
 
-![derivative](derivative.svg)
+{{< relimg "derivative.svg" "derivative" >}}
 
 It is amazing how much you can accomplish with two lines of code in Julia! The problem that motivated this blog post is multivariate with irregular regions over which $\{ x: g(x) > 0 \}$, but I used `elasticity` as above.
 

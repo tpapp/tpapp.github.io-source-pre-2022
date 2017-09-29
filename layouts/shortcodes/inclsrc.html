@@ -3,4 +3,3 @@
 {{ $file_path := (printf "%s%s" $.Page.File.Dir $file_param) }}
 <div class="codeheader"><p>download as <a href="{{ absURL $file_path }}">{{ $file_param }}</a></p></div>
 {{ highlight (readFile (printf "content/%s" $file_path)) $language ""}}
-
