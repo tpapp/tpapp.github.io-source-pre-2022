@@ -1,2 +1,2 @@
 #!/bin/sh
-hugo new --editor emacsclient post/$1/index.md &
+hugo new --editor 'emacsclient -n' post/$1/index.md &
