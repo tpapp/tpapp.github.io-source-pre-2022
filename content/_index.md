@@ -15,6 +15,10 @@ Vienna](http://www.ihs.ac.at/research-groups/macroeconomics-and-public-finance/)
 * E-mail: <tkpapp@gmail.com>
 * Github (issues, PRs): <https://github.com/tpapp>
 
+## CV
+
+[Curriculum Vitae (PDF)](/pdf/cv.pdf)
+
 ## Employment
 
 * 2009--present: Institute for Advanced Studies
