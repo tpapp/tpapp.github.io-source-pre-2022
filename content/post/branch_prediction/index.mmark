@@ -1,0 +1,120 @@
++++
+date = 2017-10-03T11:40:58+02:00
+draft = false
+title = "CPU pipelines: when more is less"
+slug = ""
+categories = [""]
+tags = ["julia", "microoptimization"]
++++
+
+I have been working on micro-optimizations for some simulation
+code, and was reminded of a counter-intuitive artifact of modern CPU
+architecture, which is worth a short post.
+
+Consider (just for the sake of example) a very simple (if not
+particularly meaningful) function,
+
+$$
+f(x) = \begin{cases}
+(x+2)^2 & \text{if } x \ge 0,\\
+1-x & \text{otherwise}
+\end{cases}
+$$
+
+with implementations
+
+```julia
+f1(x) = ifelse(x ≥ 0, abs2(x+2), 1-x)
+f2(x) = x ≥ 0 ? abs2(x+2) : 1-x
+```
+
+`f1` calculates *both* possibilities before choosing between them with
+`ifelse`, while `f2` will only calculate values on demand. So, intuitively, it should be faster. 
+
+But it isn't...
+
+```julia
+julia> x = randn(1_000_000);
+
+julia> using BenchmarkTools
+
+julia> @btime f1.($x);
+  664.228 μs (2 allocations: 7.63 MiB)
+
+julia> @btime f2.($x);
+  6.519 ms (2 allocations: 7.63 MiB)
+```
+
+...it is about 10x *slower*.
+
+This can be understood as an artifact of the [instruction
+pipeline](https://en.wikipedia.org/wiki/Instruction_pipelining): your
+x86 CPU likes to perform similar operations in staggered manner, and
+it does not like branches (jumps) because they break the flow.
+
+Comparing the native code reveals that while `f1` is jump-free, the `if` in `f2` results in a jump (`jae`):
+
+```julia
+
+julia> @code_native f1(1.0)
+        .text
+Filename: REPL[2]
+        pushq   %rbp
+        movq    %rsp, %rbp
+        movabsq $139862498743472, %rax  # imm = 0x7F34468E14B0
+        movsd   (%rax), %xmm2           # xmm2 = mem[0],zero
+Source line: 1
+        addsd   %xmm0, %xmm2
+        mulsd   %xmm2, %xmm2
+        movabsq $139862498743480, %rax  # imm = 0x7F34468E14B8
+        movsd   (%rax), %xmm3           # xmm3 = mem[0],zero
+        subsd   %xmm0, %xmm3
+        xorps   %xmm1, %xmm1
+        cmpnlesd        %xmm0, %xmm1
+        andpd   %xmm1, %xmm3
+        andnpd  %xmm2, %xmm1
+        orpd    %xmm3, %xmm1
+        movapd  %xmm1, %xmm0
+        popq    %rbp
+        retq
+        nopw    %cs:(%rax,%rax)
+
+julia> @code_native f2(1.0)
+        .text
+Filename: REPL[3]
+        pushq   %rbp
+        movq    %rsp, %rbp
+Source line: 1
+        xorps   %xmm1, %xmm1
+        ucomisd %xmm1, %xmm0
+        jae     L37
+        movabsq $139862498680736, %rax  # imm = 0x7F34468D1FA0
+        movsd   (%rax), %xmm1           # xmm1 = mem[0],zero
+        subsd   %xmm0, %xmm1
+        movapd  %xmm1, %xmm0
+        popq    %rbp
+        retq
+L37:
+        movabsq $139862498680728, %rax  # imm = 0x7F34468D1F98
+        addsd   (%rax), %xmm0
+        mulsd   %xmm0, %xmm0
+        popq    %rbp
+        retq
+        nopl    (%rax)
+```
+
+In my application the speed gain was more modest, but still
+sizeable. Benchmarking a non-branching version of your code is
+sometimes worth it, especially if it the change is simple *and* both
+branches of the conditional can be run error-free. If, for example, we
+had to calculate
+
+```julia
+g(x) = x ≥ 0 ? √(x+2) : 1-x
+```
+
+then we could not use `ifelse` without restricting the domain, since
+`√(x+2)` would fail whenever `x < -2`.
+
+Julia `Base` contains many optimizations like this: for a particularly
+nice example see functions that use `Base.null_safe_op`.
