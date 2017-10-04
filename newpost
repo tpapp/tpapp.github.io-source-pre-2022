@@ -1,2 +1,2 @@
 #!/bin/sh
-hugo new --editor 'e' post/$1/index.mmark &
+hugo new --editor emacsclient-bg post/$1/index.mmark &
