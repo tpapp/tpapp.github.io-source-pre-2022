@@ -187,7 +187,10 @@ small, .font_small {
     @media screen and (max-width: 46em) {
       #content img {
         width: 100%; } }
+  #content table {
+    margin: 1em; }
   #content .codeheader {
+    margin-top: 1em;
     background-color: #333;
     color: #eee;
     width: 100%;
@@ -198,6 +201,20 @@ small, .font_small {
       padding: 3px 8px;
       margin: 0; }
       #content .codeheader p a, #content .codeheader p a:hover {
+        background-color: #333;
+        color: #eee; }
+  #content .codedownload {
+    margin-top: 1em;
+    background-color: #333;
+    color: #eee;
+    width: 100%;
+    border-radius: 0.4em;
+    font-size: 0.833em; }
+    #content .codedownload p {
+      text-align: center;
+      padding: 3px 8px;
+      margin: 0; }
+      #content .codedownload p a, #content .codedownload p a:hover {
         background-color: #333;
         color: #eee; }
   #content pre {
