@@ -1,0 +1,84 @@
+---
+title: "Branch prediction: yet another example"
+date: 2017-10-04T10:12:02+02:00
+draft: false
+tags: ["julia", "microoptimization"]
+---
+
+Tomas Lycken linked a [very nice discussion on StackOverflow](https://stackoverflow.com/questions/11227809/why-is-it-faster-to-process-a-sorted-array-than-an-unsorted-array/11227902#11227902) about branch prediction as a comment on the [previous post]({{< ref "/post/branch_prediction/index.mmark" >}}). It has an intuitive explanation (read it if you like good metaphors) and some Java benchmarks. I was curious about how it looks in Julia.
+
+The exercise is to sum elements in a vector *only if* they are greater than or equal to 128.
+```julia
+function sumabove_if(x)
+    s = zero(eltype(x))
+    for elt in x
+        if elt ≥ 128
+            s += elt
+        end
+    end
+    s
+end
+```
+
+This calculation naturally has a branch in it, while the branchless
+version, using `ifelse`, does not:
+
+```julia
+function sumabove_ifelse(x)
+    s = zero(eltype(x))
+    for elt in x
+        s += ifelse(elt ≥ 128, elt, zero(eltype(x)))
+    end
+    s
+end
+```
+
+The actual example has something different: using tricky bit-twiddling
+to calculate the same value. I generally like to leave this sort of
+thing up to the compiler, because it is much, much better at it than I
+am, and I make mistakes all the time; worse, I don't know what I
+actually did when I reread the code 6 months later. But I included it
+here for comparison:
+
+```julia
+function sumabove_tricky(x::Vector{Int64})
+    s = Int64(0)
+    for elt in x
+        s += ~((elt - 128) >> 63) & elt
+    end
+    s
+end
+```
+
+Following the original example on StackOverflow, we sum `2^15` random integers in `1:256`. For this, we don't need to worry about overflow. We also sum the *sorted* vector: this will facilitate branch predicion, since the various branches will be contiguous.
+
+I also benchmark a simple version using generators:
+```julia
+sumabove_generator(x) = sum(y for y in x if y ≥ 128)
+```
+
+
+   | random | sorted
+:--|-------:|----:
+`if` | 139 | 28 
+`ifelse` | 21  | 21 
+`if` & `sort` | 96 | n/a
+tricky | 27 | 27
+generator | 219 | 168
+Table: Benchmarks ($$μ$$s)
+
+Benchmarks are in the table above. Note that
+
+1. for the version with `if`, working on sorted vectors is dramatically faster (about 5x).
+
+2. the non-branching `ifelse` version beats them hands down, and naturally it does not care about sorting.
+
+3. if you have to use `if`, then you are better off sorting, *even if you take the time of that into account*.
+
+4. generators are susprisingly bad.
+
+5. the tricky bit-twiddling version is actually worse than `ifelse` (which reinforces my aversion to it).
+
+Self-contained code for everything is available below.
+
+{{< refsrc "code.jl" >}}
