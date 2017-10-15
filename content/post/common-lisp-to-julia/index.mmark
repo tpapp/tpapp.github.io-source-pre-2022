@@ -1,0 +1,256 @@
++++
+date = 2017-10-15T14:17:47+02:00
+draft = false
+title = "Switching from Common Lisp to Julia"
+slug = ""
+categories = [""]
+tags = ["julia", "lisp"]
++++
+
+I have written this post for developers in the Common Lisp community
+who asked why I am switching to Julia. It may only be relevant for the
+small set of people who use Common Lisp for scientific computing.
+
+I used Common Lisp for scientific computing for a while, from 2008 to
+about 2015, in combination with R and C++. This choice may surprise
+people who don't know about projects like
+[Maxima](https://en.wikipedia.org/wiki/Maxima_(software)) or
+[FEMLISP](http://www.femlisp.org/), but Common Lisp is not a bad
+language for [scientific
+computing](https://link.springer.com/chapter/10.1007/978-3-642-19014-8_11):
+it has a great FFI, compilers like [SBCL](http://sbcl.org/) can
+generate very fast code with a few hints, and the language itself is
+composed of convenient features that interact nicely.
+
+However, around 2012 I started to become very frustrated with Common
+Lisp. Despite various attempts, it became very clear that libraries
+for scientific computing were not goint to take off: there were many
+one-person efforts (including [mine]({{< ref
+"/post/orphaned-lisp-libraries/index.mmark" >}})), but very few of
+them evolved into general tools.
+
+Initially, I was puzzled by this: Common Lisp is an extremely
+convenient and productive language. Experienced Lisp hackers can write
+very complex, fast, and elegant libraries in reasonably short
+time. Why did this not happen for numerical code?
+
+# The problem with Common Lisp
+
+Now I think that one of the main reasons for this is that while you
+can write scientific code in CL that will be (1) fast, (2) portable,
+and (3) convenient, you *cannot do all of these at the same
+time*. Arrays provide a convenient example for this.
+
+Consider
+
+```lisp
+(make-array 5 :element-type 'double-float)
+```
+
+The [standard](http://clhs.lisp.se/Body/f_upgr_1.htm) does not
+guarantee that this gives you an array of `double-float`: it may (if
+the implementation provides them), otherwise you get an array of
+element type `T`. This turned out to be a major difficulty for
+implementing portable scientific code in Common Lisp.
+
+However, this gets worse: while you can tell a function that operates
+on arrays that these arrays have element type `double-float`, you
+cannot dispatch on this, as Common Lisp does not have parametric
+types. For example, if you want to write a sum as
+
+```lisp
+(defmethod mysum ((vec vector))
+  (let ((s 0))
+    (loop for elt across vec
+       do (incf s elt))
+    s))
+```
+
+you can dispatch on the argument being a `vector`, but not on the
+element type. The compiled code may be generic.
+
+You can of course branch on the array element types and maybe
+even paper over the whole mess with sufficient macrology (which is
+what [LLA](https://github.com/tpapp/lla) ended up doing), but this
+approach is not very extensible, as eventually you end up hardcoding a
+few special types for which your functions will be "fast", otherwise
+they have to fall back to a generic, boxed type. With multiple
+arguments, the number of combinations explodes very quickly.
+
+# How Julia solves this problem
+
+A comparable native implementation in Julia would be^[This is not the fastest, nor the most precise implementation, just a comparable example.]
+
+```julia
+function mysum(vec::AbstractVector{T}) where T
+    s = zero(T)
+    for elt in vec
+        s += elt
+    end
+    s
+end
+```
+
+This is still generic: it works for all subtypes of `AbstractVector`
+(including vectors and vector-like objects), but notice how the generated code
+is conditional on the element type:
+
+```julia
+julia> @code_warntype mysum([1, 2, 3])
+Variables:
+  #self#::#mysum
+  vec::Array{Int64,1}
+  elt::Int64
+  #temp#::Int64
+  s::Int64
+
+Body:
+  begin 
+      s::Int64 = 0 # line 3:
+      #temp#::Int64 = 1
+      4: 
+      unless (Base.not_int)((#temp#::Int64 === (Base.add_int)((Base.arraylen)(vec::Array{Int64,1
+})::Int64, 1)::Int64)::Bool)::Bool goto 14                                                     
+      SSAValue(2) = (Base.arrayref)(vec::Array{Int64,1}, #temp#::Int64)::Int64
+      SSAValue(3) = (Base.add_int)(#temp#::Int64, 1)::Int64
+      elt::Int64 = SSAValue(2)
+      #temp#::Int64 = SSAValue(3) # line 4:
+      s::Int64 = (Base.add_int)(s::Int64, elt::Int64)::Int64
+      12: 
+      goto 4
+      14:  # line 6:
+      return s::Int64
+  end::Int64
+
+julia> @code_warntype mysum([1.0, 2.0, 3.0])
+Variables:
+  #self#::#mysum
+  vec::Array{Float64,1}
+  elt::Float64
+  #temp#::Int64
+  s::Float64
+
+Body:
+  begin 
+      s::Float64 = (Base.sitofp)(Float64, 0)::Float64 # line 3:
+      #temp#::Int64 = 1
+      4: 
+      unless (Base.not_int)((#temp#::Int64 === (Base.add_int)((Base.arraylen)(vec::Array{Float64
+,1})::Int64, 1)::Int64)::Bool)::Bool goto 14                                                   
+      SSAValue(2) = (Base.arrayref)(vec::Array{Float64,1}, #temp#::Int64)::Float64
+      SSAValue(3) = (Base.add_int)(#temp#::Int64, 1)::Int64
+      elt::Float64 = SSAValue(2)
+      #temp#::Int64 = SSAValue(3) # line 4:
+      s::Float64 = (Base.add_float)(s::Float64, elt::Float64)::Float64
+      12: 
+      goto 4
+      14:  # line 6:
+      return s::Float64
+  end::Float64
+```
+
+I mentioned "vector-like objects" above, since I can choose different
+representations for special objects. For example, to do calculations
+with a vector of `1`s, I can define
+
+```julia
+struct Ones{T <: Number} <: AbstractVector{T}
+    len::Int
+end
+```
+
+At this point, in order to calculate the sum above, I have two choices:
+
+1. Implement the [relevant
+interface](https://docs.julialang.org/en/latest/manual/interfaces/),
+with functions like
+```julia
+Base.length(x::Ones) = x.len
+```
+and similarly for element access, etc. This would generate specialized code for the method above, reasonably efficient code, but still iterate over the "elements".
+
+2. In addition, I can define
+```julia
+mysum(vec::Ones{T}) where T = vec.len * one(T)
+```
+which would provide a method for `mysum`.
+
+A sufficiently rich parametric type system with multiple dispatch
+integrated into the language and supported by a JIT compiler is the
+secret weapon of Julia. Most of the time, *you don't have to do
+anything*, as it happens automatically for concrete types. Sometimes,
+you have to help the compiler a bit, by writing code where the result
+is [type
+stable](https://docs.julialang.org/en/latest/manual/performance-tips/#Write-%22type-stable%22-functions-1),
+ie the result type just depends on the type (not the value) of the
+arguments and can be inferred by the compiler. Sometimes you have to
+nudge the compiler a bit, and sometimes you have to be careful not to
+mess up type inference: for example, the `zero(T)` above gives a `0`
+of type `T`, always ensuring a correct type that does not change
+during the summation.
+
+# Comparison of other language features
+
+While I would say that multiple dispatch with parametric types
+designed into the language from the ground up is the most important
+feature of Julia, there are other language features worth comparing to
+Common Lisp.
+
+[Metaprogramming](https://docs.julialang.org/en/latest/manual/metaprogramming/)
+is supported. Because of infix syntax, the AST is not as simple as
+S-expressions, but the tools to work with it are evolving fast. That
+said, I don't write as many macros as I did in Common Lisp. Parametric
+types are so powerful that I rarely need macros for performance
+reasons, and instead of syntax extensions, I often go for zero-cost
+abstraction via functions and wrapper types. An interesting
+metaprogramming tool in Julia is [generated
+functions](https://docs.julialang.org/en/latest/manual/metaprogramming/#Generated-functions-1),
+which allow code generation based on argument templates, I use this
+frequently. The equivalent of reader macros are called [non-standard
+string
+literals](https://docs.julialang.org/en/latest/manual/metaprogramming/#Non-Standard-String-Literals-1)
+in Julia.
+
+The foreign function interface of Julia is seamlessly integrated into
+the language and very convenient to use. Docstrings are almost the
+same as in Common Lisp, but they support Markdown. Strings are UTF8 by
+default, and very fast. The
+[community](https://discourse.julialang.org/) is very vibrant, open,
+and helpful. Simple questions get an answer within minutes,
+complicated ones (eg compiler internals) may take a bit longer, but
+are usually answered within a few hours or a day at most. If you are
+coming from the Common Lisp community, you will see quite a few
+familiar faces.
+
+The library ecosystem already surpasses that of Common Lisp, at least
+for scientific programming. High-quality, well-tested code is
+available for linear algebra including sparse matrices (most of it in
+the standard library), optimization, differential equations, and
+automatic differentiation. The
+[latter](http://www.juliadiff.org/ForwardDiff.jl/stable/) is simply
+amazing: by providing a type for dual numbers and a few operations,
+forward-mode AD can be used without any implementation
+overhead. Plotting libraries are available (mostly using foreign
+function backends), and R-like "dataframes" are under development.
+
+# Conclusion
+
+Common Lisp has been and remains a great language, with many excellent
+features that preceded other languages by decades. It has an ANSI
+standard, which means that portable code written decades ago
+will run on a recent implementation. This is a great advantage, but at
+the same time this freezes the language development at the point the
+standard was finalized. No matter how flexible and forward-looking it
+is, it cannot predict and accommodate all possible advances for
+decades.
+
+In contrast, Julia is rapidly evolving. At this stage, code that was
+written half a year ago is very likely to be broken with the most
+recent release.^[An elegant [deprecation mechanism](https://github.com/JuliaLang/Compat.jl) is available, but that can't deal with some fundamental language changes.] The pace of change will most likely slow down a bit after 1.0 is released, but for now, expect a lot of churning.
+
+On the other hand, programmers who used Common Lisp for scientific
+computing have always expected to get their hands dirty, since so
+little existing code was available. This is a good time to consider
+investing into Julia instead: you will get more done with less work,
+and you still get to program in a very elegant language that traces a
+lot of its roots to the Lisp family.

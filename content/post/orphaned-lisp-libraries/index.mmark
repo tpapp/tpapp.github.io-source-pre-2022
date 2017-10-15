@@ -1,0 +1,72 @@
+---
+title: "Clarification: on orphaning my Common Lisp libraries"
+date: 2017-10-15T13:02:14+02:00
+draft: false
+tags: ["lisp", "packages"]
+---
+
+I have not been programming in Common Lisp for a few years, and since
+I find [Julia](https://julialang.org/) a "much better Lisp", I am
+unlikely to go back to it in the foreseeable future. This is a
+clarification regarding some
+[libraries](https://github.com/tpapp?utf8=%E2%9C%93&tab=repositories&q=&type=public&language=common%20lisp)
+I have written in Common Lisp and made public.
+
+
+# All of my Common Lisp libraries are orphaned
+
+1. They are effectively *abandonware* as far as I am concerned. Since
+   fixing issues and evaluating PRs entails a large fixed cost for
+   which I don't have the time (setting up my CL environment again,
+   understanding what I wrote years ago, thinking about code
+   correctness and corner cases of the language spec that I have
+   forgotten), I will ignore issues and pull requests. Sorry about this.
+
+2. If you find anything of value in these libraries, please feel free
+   to use that according to their licenses. *You don't have to ask me
+   explicitly.*
+
+3. If you want to take over maintaining any of these libraries, *you
+   don't have to ask me*. **Just fork, and start coding.** If you have
+   been consistently maintaining one of these libraries for a year or
+   more, announce that you are resurrecting the library on the
+   relevant Common Lisp forums. You can also drop me an e-mail and I
+   will put a line in the README of my version that redirects users to
+   your version. Eventually, you should convince [Zach
+   Beane](https://github.com/quicklisp/) to use your version in
+   Quicklisp.
+
+4. I cannot provide any significant help regarding the code
+   due to time constraints. Some of it is documented, and most of it
+   has unit tests, you have to figure out the rest yourself.
+
+
+# Which libraries are worth the effort?
+
+1. `let-plus` is an extensible destructuring library. The syntax is
+   versatile and intuitive.
+   
+2. `LLA`, aka Lisp Linear Algebra, is a wrapper for BLAS/LAPACK using
+   native Common Lisp arrays. It is somewhat incomplete (eigenvalues
+   need some work) but what is available works. It is *fast* on
+   implementations which provide arrays for certain float element
+   types, so that it does not have to copy the data, and is a bit
+   slower on implementations that don't allow this. Still, copying is
+   $$O(n)$$, while most LAPACK operations are $$O(n^2)$$ or worse, so
+   this is not a huge concern. Nevertheless, it is possible that
+   implementations that did not provide specialized arrays at the time
+   I wrote LLA have caught up. You would need to extend the glue code
+   to work with them.
+   
+3. `cl-slice`, array slices for native Common Lisp arrays.
+
+4. `cl-random`, `cl-num-utils`, `cl-rmath`: random numbers, simple
+   numerical algorithms, a wrapper for libRmath.
+
+5. `cl-colors`, named colors and color combinations.
+
+The rest are either early experiments, preliminary versions that
+evolved into the libraries above, or projects that did not pan out.
+
+PS.: Some people asked why I switched to Julia from Common Lisp. A
+post about that will follow soon.
