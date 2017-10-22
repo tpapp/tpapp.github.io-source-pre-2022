@@ -7,6 +7,8 @@ categories = [""]
 tags = ["julia", "emacs"]
 +++
 
+(**edit** 2017-10-22: fixed path for `PkgDev.generate` example)
+
 This is a summary of the workflow I find ideal for working with Julia. Although the manual has a [section on workflow](https://docs.julialang.org/en/latest/manual/workflow-tips/), it does not mention all the tools that I find useful, so perhaps this will benefit some users of Julia.
 
 I use Emacs, with [`julia-mode`](https://github.com/JuliaEditorSupport/julia-emacs) (for editing the source) and [`julia-repl`](https://github.com/tpapp/julia-repl) (REPL integration). The latter is my own package; you can use [`ESS`](https://ess.r-project.org/) instead, which has some advantages (eg multiple inferior processes) and disadvantages (no ANSI terminal support). The choice of an editor is highly subjective: at the end of the day, all you need is one that is capable of sending code to the REPL and can, in turn, be used by the REPL to open a file at a particular point. I use
@@ -27,7 +29,7 @@ push!(LOAD_PATH, LOCAL_PACKAGES)
 I create local packages with
 ```julia
 import PkgDev
-PkgDev.generate("MyPkg", "MIT"; path = joinpath(LOCAL_PACKAGES, "MyPkg"))
+PkgDev.generate("MyPkg", "MIT"; path = LOCAL_PACKAGES)
 ```
 
 Then I open the file and start working on it with
