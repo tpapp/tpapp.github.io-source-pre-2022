@@ -23,13 +23,13 @@ p {
   margin-bottom: 1em; }
 
 h2 {
-  font-size: 1.521em; }
+  font-size: 1.728em; }
 
 h3 {
-  font-size: 1.322em; }
+  font-size: 1.44em; }
 
 h4 {
-  font-size: 1.15em; }
+  font-size: 1.2em; }
 
 small, .font_small {
   font-size: 0.833em; }
@@ -247,3 +247,5 @@ small, .font_small {
     background-color: #aaa;
     margin-top: 1em;
     margin-bottom: 0.2em; }
+
+/*# sourceMappingURL=style.css.map */
