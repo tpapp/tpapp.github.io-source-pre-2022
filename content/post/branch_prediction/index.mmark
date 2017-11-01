@@ -7,12 +7,9 @@ categories = [""]
 tags = ["julia", "microoptimization"]
 +++
 
-I have been working on micro-optimizations for some simulation
-code, and was reminded of a counter-intuitive artifact of modern CPU
-architecture, which is worth a short post.
+I have been working on micro-optimizations for some simulation code, and was reminded of a counter-intuitive artifact of modern CPU architecture, which is worth a short post.
 
-Consider (just for the sake of example) a very simple (if not
-particularly meaningful) function,
+Consider (just for the sake of example) a very simple (if not particularly meaningful) function,
 
 $$
 f(x) = \begin{cases}
@@ -28,8 +25,7 @@ f1(x) = ifelse(x ≥ 0, abs2(x+2), 1-x)
 f2(x) = x ≥ 0 ? abs2(x+2) : 1-x
 ```
 
-`f1` calculates *both* possibilities before choosing between them with
-`ifelse`, while `f2` will only calculate values on demand. So, intuitively, it should be faster. 
+`f1` calculates *both* possibilities before choosing between them with `ifelse`, while `f2` will only calculate values on demand. So, intuitively, it should be faster.
 
 But it isn't...
 
@@ -47,10 +43,7 @@ julia> @btime f2.($x);
 
 ...it is about 10x *slower*.
 
-This can be understood as an artifact of the [instruction
-pipeline](https://en.wikipedia.org/wiki/Instruction_pipelining): your
-x86 CPU likes to perform similar operations in staggered manner, and
-it does not like branches (jumps) because they break the flow.
+This can be understood as an artifact of the [instruction pipeline](https://en.wikipedia.org/wiki/Instruction_pipelining): your x86 CPU likes to perform similar operations in staggered manner, and it does not like branches (jumps) because they break the flow.
 
 Comparing the native code reveals that while `f1` is jump-free, the `if` in `f2` results in a jump (`jae`):
 
@@ -103,18 +96,12 @@ L37:
         nopl    (%rax)
 ```
 
-In my application the speed gain was more modest, but still
-sizeable. Benchmarking a non-branching version of your code is
-sometimes worth it, especially if it the change is simple *and* both
-branches of the conditional can be run error-free. If, for example, we
-had to calculate
+In my application the speed gain was more modest, but still sizeable. Benchmarking a non-branching version of your code is sometimes worth it, especially if it the change is simple *and* both branches of the conditional can be run error-free. If, for example, we had to calculate
 
 ```julia
 g(x) = x ≥ 0 ? √(x+2) : 1-x
 ```
 
-then we could not use `ifelse` without restricting the domain, since
-`√(x+2)` would fail whenever `x < -2`.
+then we could not use `ifelse` without restricting the domain, since `√(x+2)` would fail whenever `x < -2`.
 
-Julia `Base` contains many optimizations like this: for a particularly
-nice example see functions that use `Base.null_safe_op`.
+Julia `Base` contains many optimizations like this: for a particularly nice example see functions that use `Base.null_safe_op`.
