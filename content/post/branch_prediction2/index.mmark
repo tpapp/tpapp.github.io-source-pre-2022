@@ -20,8 +20,7 @@ function sumabove_if(x)
 end
 ```
 
-This calculation naturally has a branch in it, while the branchless
-version, using `ifelse`, does not:
+This calculation naturally has a branch in it, while the branchless version, using `ifelse`, does not:
 
 ```julia
 function sumabove_ifelse(x)
@@ -33,12 +32,7 @@ function sumabove_ifelse(x)
 end
 ```
 
-The actual example has something different: using tricky bit-twiddling
-to calculate the same value. I generally like to leave this sort of
-thing up to the compiler, because it is much, much better at it than I
-am, and I make mistakes all the time; worse, I don't know what I
-actually did when I reread the code 6 months later. But I included it
-here for comparison:
+The actual example has something different: using tricky bit-twiddling to calculate the same value. I generally like to leave this sort of thing up to the compiler, because it is much, much better at it than I am, and I make mistakes all the time; worse, I don't know what I actually did when I reread the code 6 months later. But I included it here for comparison:
 
 ```julia
 function sumabove_tricky(x::Vector{Int64})
