@@ -7,15 +7,9 @@ categories = [""]
 tags = ["julia", "emacs", "julia-repl"]
 +++
 
-I scratched a long-standing itch and made locations in error messages
-"clickable" in `julia-repl`. Not yet merged into `master`, the change
-is in the
-[`clickable-locations`](https://github.com/tpapp/julia-repl/tree/clickable-locations)
-branch.
+I scratched a long-standing itch and made locations in error messages "clickable" in `julia-repl`. Not yet merged into `master`, the change is in the [`clickable-locations`](https://github.com/tpapp/julia-repl/tree/clickable-locations) branch.
 
-Testing is needed because of some hacks (again, I am not an Emacs
-expert), I will see if there are issues then merge it. This is what it
-looks like, those red and orange lines take you to the source:
+Testing is needed because of some hacks (again, I am not an Emacs expert), I will see if there are issues then merge it. This is what it looks like, those red and orange lines take you to the source:
 
 <pre style="color: #262626; background-color: #ded6c5;">
 <span style="color: #008b45; background-color: #ded6c5; font-weight: bold;">julia&gt; </span><span style="color: #262626; background-color: #ded6c5;">include("/tmp/Foo.jl")</span><span style="color: #262626; background-color: #ded6c5;">
