@@ -1,0 +1,29 @@
++++
+date = 2017-11-01T12:27:23+01:00
+draft = false
+title = "WIP: making error locations in julia-repl clickable"
+slug = ""
+categories = [""]
+tags = ["julia", "emacs", "julia-repl"]
++++
+
+I scratched a long-standing itch and made locations in error messages
+"clickable" in `julia-repl`. Not yet merged into `master`, the change
+is in the
+[`clickable-locations`](https://github.com/tpapp/julia-repl/tree/clickable-locations)
+branch.
+
+Testing is needed because of some hacks (again, I am not an Emacs
+expert), I will see if there are issues then merge it. This is what it
+looks like, those red and orange lines take you to the source:
+
+<pre style="color: #262626; background-color: #ded6c5;">
+<span style="color: #008b45; background-color: #ded6c5; font-weight: bold;">julia&gt; </span><span style="color: #262626; background-color: #ded6c5;">include("/tmp/Foo.jl")</span><span style="color: #262626; background-color: #ded6c5;">
+</span><span style="color: #262626; background-color: #ded6c5;">ERROR: LoadError: UndefVarError: T not defined</span><span style="color: #262626; background-color: #ded6c5;">
+</span><span style="color: #262626; background-color: #ded6c5;">Stacktrace:</span><span style="color: #262626; background-color: #ded6c5;">
+</span><span style="color: #262626; background-color: #ded6c5;"> [1] </span><span style="color: #262626; background-color: #ded6c5; font-weight: bold;">include_from_node1(</span><span style="color: #262626; background-color: #ded6c5;">::String</span><span style="color: #262626; background-color: #ded6c5; font-weight: bold;">)</span><span style="color: #262626; background-color: #ded6c5;"> </span><span style="color: #262626; background-color: #ded6c5; text-decoration: underline;">at </span><span style="color: #f71010; font-weight: bold; text-decoration: underline;">./loading.jl</span><span style="color: #262626; background-color: #ded6c5; font-weight: bold; text-decoration: underline;">:</span><span style="color: #ef8300; text-decoration: underline;">576</span><span style="color: #262626; background-color: #ded6c5;">
+</span><span style="color: #262626; background-color: #ded6c5;"> [2] </span><span style="color: #262626; background-color: #ded6c5; font-weight: bold;">include(</span><span style="color: #262626; background-color: #ded6c5;">::String</span><span style="color: #262626; background-color: #ded6c5; font-weight: bold;">)</span><span style="color: #262626; background-color: #ded6c5;"> </span><span style="color: #262626; background-color: #ded6c5; text-decoration: underline;">at </span><span style="color: #f71010; font-weight: bold; text-decoration: underline;">./sysimg.jl</span><span style="color: #262626; background-color: #ded6c5; font-weight: bold; text-decoration: underline;">:</span><span style="color: #ef8300; text-decoration: underline;">14</span><span style="color: #262626; background-color: #ded6c5;">
+</span><span style="color: #262626; background-color: #ded6c5; text-decoration: underline;">while loading </span><span style="color: #f71010; font-weight: bold; text-decoration: underline;">/tmp/Foo.jl</span><span style="color: #262626; background-color: #ded6c5; text-decoration: underline;">, in expression starting on line </span><span style="color: #ef8300; text-decoration: underline;">9</span><span style="color: #262626; background-color: #ded6c5;">
+
+</span><span style="color: #008b45; background-color: #ded6c5; font-weight: bold;">julia&gt; </span><span style="color: #262626; background-color: #ded6c5;">
+</span></pre>
