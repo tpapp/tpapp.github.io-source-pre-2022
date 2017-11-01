@@ -7,16 +7,9 @@ categories = [""]
 tags = ["emacs"]
 +++
 
-[`htmlize`](https://github.com/hniksic/emacs-htmlize), written by Hrvoje
-Nikšić, is a neat little Emacs package that converts face information
-from an Emacs buffer (or region) into HTML, effectively allowing the
-verbatim reproduction of what it looks like.
+[`htmlize`](https://github.com/hniksic/emacs-htmlize), written by Hrvoje Nikšić, is a neat little Emacs package that converts face information from an Emacs buffer (or region) into HTML, effectively allowing the verbatim reproduction of what it looks like.
 
-I found this so useful for blogging that I submitted a PR which saves
-marked up regions as self-contained `<pre>` snippets, complete with
-inline CSS. Hrvoje kindly merged the PR today, so now you can call
-`htmlize-region-save-screenshot` and the result will be saved into the
-kill ring. You can paste this into, say, a blog post written in Markdown or [Mmark](https://github.com/miekg/mmark), such as this one, and get a "screenshot" like
+I found this so useful for blogging that I submitted a PR which saves marked up regions as self-contained `<pre>` snippets, complete with inline CSS. Hrvoje kindly merged the PR today, so now you can call `htmlize-region-save-screenshot` and the result will be saved into the kill ring. You can paste this into, say, a blog post written in Markdown or [Mmark](https://github.com/miekg/mmark), such as this one, and get a "screenshot" like
 
 <pre style="color: #262626; background-color: #ded6c5;">
 <span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">htmlize-region-save-screenshot</span> <span style="color: #262626;">(</span>beg end<span style="color: #262626;">)</span>
@@ -30,10 +23,6 @@ approximates the buffer as closely as possible."</span>
   <span style="color: #262626;">(</span>deactivate-mark<span style="color: #262626;">))</span>
 </pre>
 
-which is *almost* exactly what it looks like on my screen when it
-comes to colors and font style/weight, but using a different font of
-course. This allows integration of Emacs "screenshots" into blog posts
-without resorting to pixel-based formats, which would result from
-taking actual screenshots.
+which is *almost* exactly what it looks like on my screen when it comes to colors and font style/weight, but using a different font of course. This allows integration of Emacs "screenshots" into blog posts without resorting to pixel-based formats, which would result from taking actual screenshots.
 
 You can install `htmlize` from [MELPA](https://melpa.org/).
