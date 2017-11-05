@@ -282,14 +282,12 @@ small, .font_small {font-size: 0.833em;}
     pre {
         margin: 0;
         padding: 3px 8px;
-        font-family: 'Fira Mono', monospace;
-        font-size: 0.8em;
+        font-family: 'Roboto Mono', monospace;
         overflow: auto;
         background-color: $codebg;
-        code {
-            font-family: 'Fira Mono', monospace;
-            font-size: inherit;
-        }
+    }
+    code {
+        font-family: 'Roboto Mono', monospace;
     }
     ul.mainlist {
         list-style-type: none;
