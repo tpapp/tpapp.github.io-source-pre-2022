@@ -2,8 +2,10 @@
 <div id="content">
 <h1>{{ .Title }}</h1>
 {{ .Content }}
+{{ range .Data.Pages.GroupByDate "2006-01" }}
+<h3>{{ .Key }}</h3>
+{{ range .Pages }}
 <ul class="mainlist">
-{{ range .Paginator.Pages  }}
 <li>
   <a href="{{ .Permalink }}">{{ .Title }}</a>
   <p class="additionalinfo">
@@ -11,8 +13,9 @@
     {{- partial "tags.html" . }}
   </p>
 </li>
-{{ end }}
 </ul>
+{{ end }}
+{{ end }}
 </div>
 
 {{ partial "footer.html" . }}
