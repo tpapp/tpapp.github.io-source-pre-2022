@@ -4,8 +4,8 @@
 {{ .Content }}
 {{ range .Data.Pages.GroupByDate "2006-01" }}
 <h3>{{ .Key }}</h3>
-{{ range .Pages }}
 <ul class="mainlist">
+{{ range .Pages }}
 <li>
   <a href="{{ .Permalink }}">{{ .Title }}</a>
   <p class="additionalinfo">
@@ -13,8 +13,8 @@
     {{- partial "tags.html" . }}
   </p>
 </li>
-</ul>
 {{ end }}
+</ul>
 {{ end }}
 </div>
 

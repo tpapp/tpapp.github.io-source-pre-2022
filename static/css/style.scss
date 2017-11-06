@@ -182,9 +182,10 @@ small, .font_small {font-size: 0.833em;}
 
 #content {
     padding-top: 0em;
-    max-width: $content-width;
+    padding-bottom: 1em;
     padding-left: calc((100% - #{$content_width}) / 2);
     padding-right: calc((100% - #{$content_width}) / 2);
+    max-width: $content-width;
     @include small_screen {
         max-width: calc(100% - 1em);
         padding-left: $smallscreen_padding;
@@ -291,12 +292,15 @@ small, .font_small {font-size: 0.833em;}
     }
     ul.mainlist {
         list-style-type: none;
-        padding-left: 0;
+        padding: 0;
+        margin: 0;
         text-align: left;
-        p.additionalinfo {
-            padding-top: 0;
-            margin-top: 0;
-            font-size: 0.833em;
+        li {
+            p.additionalinfo {
+                padding: 0;
+                margin: 0;
+                font-size: 0.833em;
+            }
         }
     }
     img#tamaskpapp {
