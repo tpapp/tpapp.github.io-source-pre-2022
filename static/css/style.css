@@ -36,7 +36,7 @@ small, .font_small {
 
 #smallscreenwarning {
   display: none; }
-  @media screen and (max-width: 46em) {
+  @media screen and (max-width: 51em) {
     #smallscreenwarning {
       position: fixed;
       bottom: 0;
@@ -86,12 +86,12 @@ small, .font_small {
       background-color: #aaa;
       color: #222;
       padding: 0.5em;
-      width: 42em;
+      width: 47em;
       text-align: center;
       right: 0;
       top: 0;
       z-index: 1; }
-      @media screen and (max-width: 46em) {
+      @media screen and (max-width: 51em) {
         #navbar .dropdown .dropdown-content {
           position: fixed;
           left: 1em;
@@ -142,10 +142,10 @@ small, .font_small {
 #content {
   padding-top: 0em;
   padding-bottom: 1em;
-  padding-left: calc((100% - 45em) / 2);
-  padding-right: calc((100% - 45em) / 2);
-  max-width: 45em; }
-  @media screen and (max-width: 46em) {
+  padding-left: calc((100% - 50em) / 2);
+  padding-right: calc((100% - 50em) / 2);
+  max-width: 50em; }
+  @media screen and (max-width: 51em) {
     #content {
       max-width: calc(100% - 1em);
       padding-left: 0.5em;
@@ -182,10 +182,10 @@ small, .font_small {
   #content img {
     display: block;
     max-width: 100%;
-    width: 36em;
+    width: 40em;
     padding: 0;
     margin: 0 auto; }
-    @media screen and (max-width: 46em) {
+    @media screen and (max-width: 51em) {
       #content img {
         width: 100%; } }
   #content table {
@@ -223,7 +223,8 @@ small, .font_small {
     padding: 3px 8px;
     font-family: 'Roboto Mono', monospace;
     overflow: auto;
-    background-color: #f7f7f7; }
+    background-color: #f7f7f7;
+    font-size: 0.95em; }
   #content code {
     font-family: 'Roboto Mono', monospace; }
   #content ul.mainlist {

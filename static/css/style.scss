@@ -9,7 +9,7 @@ $darkfg: #eee;
 $darkhover: #4682b4;
 $codebg: #f7f7f7;
 
-$content_width: 45em;
+$content_width: 50em;
 $content_padding: 8em;
 $smallscreen_padding: 0.5em;
 
@@ -286,6 +286,7 @@ small, .font_small {font-size: 0.833em;}
         font-family: 'Roboto Mono', monospace;
         overflow: auto;
         background-color: $codebg;
+        font-size: 0.95em;
     }
     code {
         font-family: 'Roboto Mono', monospace;
