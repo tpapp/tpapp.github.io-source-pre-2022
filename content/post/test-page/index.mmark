@@ -1,0 +1,47 @@
++++
+date = 2017-11-16T11:08:26+01:00
+draft = true
+title = "Test page for CSS formatting"
+slug = ""
+categories = [""]
+tags = ["test-tag"]
++++
+
+## Just to check line width
+
+abcdefghijklmnopqrstuvwz abcdefghijklmnopqrstuvwz abcdefghijklmnopqrstuvwz
+
+Look, a footnote!^[This is a footnote.] They come in pairs.^[Another footnote.]
+
+Some inline math $$\sqrt{a^2+\theta^2}$$, then some display math:
+
+$$
+p(x \mid \mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma}} e^{-(x-\mu)^2}{2\sigma^2}
+$$
+
+## This is a H2
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel purus tempor, lacinia justo non, mattis elit. Integer et risus quis mi euismod accumsan. Praesent quam sapien, scelerisque id cursus non, porta in odio. Praesent molestie et ante non volutpat. Quisque ac massa dignissim, elementum ante quis, cursus tortor. Fusce varius tellus est, id placerat augue dictum a. Phasellus congue, ligula in imperdiet viverra, ipsum purus ornare metus, eu ultricies purus mauris at leo. Curabitur non aliquet mauris, at rhoncus mauris. Pellentesque id erat in odio tincidunt aliquet. In hac habitasse platea dictumst. Proin non ante risus. Nulla laoreet, nulla ac scelerisque iaculis, lectus arcu posuere massa, vitae interdum massa ipsum in tortor. Nam luctus faucibus nunc, ut suscipit mi tincidunt cursus. Vivamus malesuada nibh et semper tempus. Aenean nec commodo justo.
+
+### This is a H3
+
+Pellentesque dui lorem, finibus nec nulla ut, auctor lobortis ante. Nunc pretium eros at ex porttitor sagittis. Cras fringilla laoreet iaculis. Sed laoreet elit vitae ex tempus, eget luctus ipsum iaculis. Sed luctus leo et risus faucibus, vitae blandit mi aliquam. Vivamus fringilla justo in pharetra convallis. Morbi blandit, enim id bibendum tristique, nisl velit aliquet lacus, et viverra purus nisi ut dolor. Morbi nisi lectus, pharetra sed dapibus nec, vulputate quis metus. Duis facilisis quam justo, eu aliquet orci volutpat ut. Sed molestie sem elit, sit amet tempus velit dictum eget. Praesent velit dui, vestibulum at pharetra vitae, facilisis nec felis. Vivamus tincidunt efficitur ligula. Nunc eleifend quam sit amet mi porttitor, non porttitor elit congue.
+
+Some random code:
+
+```julia
+function long_function_name(test, foo, bar; baz = 99)
+    a^2 + θ + 999 + α + α̂ + √77 + 42 #                  72 characters ->
+    for i in indices(foo, 200)       #                      76 characters ->
+        bar += 1                     #                          80 characters ->
+    end
+end
+```
+
+*Donec* rhoncus augue egestas quam mollis porttitor. Donec blandit lorem ut odio venenatis consequat nec et erat. Curabitur eget mi vulputate, aliquam dui ut, porta felis. Mauris accumsan sagittis dignissim. In nec *turpis metus*. Nunc interdum porta felis non tristique. Duis dictum, nulla vitae ornare laoreet, eros dolor blandit nisl, ac mattis nisi metus sit amet massa. Morbi rutrum dui mi, a pretium tellus blandit quis. In vulputate nec mauris ut tristique. Suspendisse ligula augue, **mattis vel hendrerit non**, gravida vitae augue.
+
+Sed gravida pellentesque mauris, `Base.Terminals` id ultricies libero viverra nec. Morbi nisi nisi, congue id ligula id, gravida viverra leo. Aliquam erat volutpat. Donec justo mauris, bibendum vel consectetur non, ultrices non ligula. Maecenas at libero `i += 1` ac augue interdum interdum. Nullam vestibulum condimentum ornare. Pellentesque ut mollis tortor.
+
+### This is H4, almost never used
+
+Integer id magna aliquam, porttitor sapien in, mattis neque. Curabitur porta eget metus at elementum. Donec convallis aliquet tortor sed egestas. Donec faucibus facilisis dolor, sit amet varius eros congue a. Proin eu tellus condimentum, consequat ex at, consectetur lectus. Cras sed ligula varius, facilisis purus ac, ultrices arcu. Vivamus pharetra nunc a pellentesque sagittis. Suspendisse posuere orci vitae finibus elementum. Vivamus ac consectetur urna. Sed ut dui posuere, porta massa eleifend, blandit sapien. Nunc tempus ante erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet auctor sapien.
