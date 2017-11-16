@@ -15,16 +15,16 @@ body {
   color: #222;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: normal;
-  line-height: 1.50; }
+  line-height: 1.4; }
 
 h1, h2, h3, h4 {
-  margin: 1.4em 0 0.7em 0;
+  margin: 1.75rem 0 0.875rem 0;
   font-weight: 600;
-  line-height: 1em; }
+  line-height: 1; }
 
-p, ol, ul, .highlight {
-  margin-top: 0.7em;
-  margin-bottom: 0.7em; }
+p, ol, ul {
+  margin-top: 0.875rem;
+  margin-bottom: 0.875rem; }
 
 h1 {
   font-size: 1.331em; }
@@ -147,8 +147,8 @@ small, .font_small {
   clear: left; }
 
 #content {
-  padding-top: 0em;
-  padding-bottom: 1em;
+  padding-top: 0;
+  padding-bottom: 1.75rem;
   padding-left: calc((100% - 40em) / 2);
   padding-right: calc((100% - 40em) / 2);
   max-width: 40em; }
@@ -197,20 +197,22 @@ small, .font_small {
         width: 100%; } }
   #content table {
     margin: 1em; }
-  #content .codeheader {
+  #content .codedisplay .codeheader {
     margin-top: 1em;
     background-color: #333;
     color: #eee;
     width: 100%;
     border-radius: 0.4em 0.4em 0 0;
     font-size: 0.833em; }
-    #content .codeheader p {
+    #content .codedisplay .codeheader p {
       text-align: center;
       padding: 3px 8px;
       margin: 0; }
-      #content .codeheader p a, #content .codeheader p a:hover {
+      #content .codedisplay .codeheader p a, #content .codedisplay .codeheader p a:hover {
         background-color: #333;
         color: #eee; }
+  #content .codedisplay pre {
+    margin: 0; }
   #content .codedownload {
     margin-top: 1em;
     background-color: #333;
@@ -227,6 +229,8 @@ small, .font_small {
         color: #eee; }
   #content pre {
     margin: 0;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
     padding-left: 3px;
     padding-top: 3px;
     padding-bottom: 3px;

@@ -21,6 +21,10 @@ $small_screen_width: $content_width + 2 * $smallscreen_padding;
   }
 }
 
+$base-line-height: 1.4;
+$base-font-size: 1.25rem;
+$vertical-rhythm: $base-line-height * $base-font-size;
+
 html {
     font-size: 1em;
     box-sizing: border-box;
@@ -38,18 +42,18 @@ body {
     color: $lightfg;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: normal;
-    line-height: 1.50;
+    line-height: $base-line-height;
 }
 
 h1, h2, h3, h4 {
-    margin: 1.4em 0 0.7em 0;
+    margin: $vertical-rhythm 0 $vertical-rhythm * 0.5 0;
     font-weight: 600;
-    line-height: 1em;
+    line-height: 1;
 }
 
-p, ol, ul, .highlight {
-    margin-top: 0.7em;
-    margin-bottom: 0.7em;
+p, ol, ul {
+    margin-top: 0.5 * $vertical-rhythm;
+    margin-bottom: 0.5 * $vertical-rhythm;
 }
 
 h1 {
@@ -196,8 +200,8 @@ small, .font_small {font-size: 0.833em;}
 }
 
 #content {
-    padding-top: 0em;
-    padding-bottom: 1em;
+    padding-top: 0;
+    padding-bottom: $vertical-rhythm;
     padding-left: calc((100% - #{$content_width}) / 2);
     padding-right: calc((100% - #{$content_width}) / 2);
     max-width: $content-width;
@@ -261,22 +265,28 @@ small, .font_small {font-size: 0.833em;}
     table {
         margin: 1em;
     }
-    .codeheader {
-        margin-top: 1em;
-        background-color: $darkbg;
-        color: $darkfg;
-        width: 100%;
-        border-radius: 0.4em 0.4em 0 0;
-        font-size: 0.833em;
-        p {
-            text-align: center;
-            padding: 3px 8px;
-            margin: 0;
-            a, a:hover {
-                background-color: $darkbg;
-                color: $darkfg;
+    .codedisplay {
+        .codeheader {
+            margin-top: 1em;
+            background-color: $darkbg;
+            color: $darkfg;
+            width: 100%;
+            border-radius: 0.4em 0.4em 0 0;
+            font-size: 0.833em;
+            p {
+                text-align: center;
+                padding: 3px 8px;
+                margin: 0;
+                a, a:hover {
+                    background-color: $darkbg;
+                    color: $darkfg;
+                }
             }
         }
+        pre {
+            margin: 0;
+        }
+
     }
     .codedownload {
         margin-top: 1em;
@@ -297,6 +307,8 @@ small, .font_small {font-size: 0.833em;}
     }
     pre {
         margin: 0;
+        margin-top: 0.5 * $vertical-rhythm;
+        margin-bottom: 0.5 * $vertical-rhythm;
         padding-left: 3px;
         padding-top: 3px;
         padding-bottom: 3px;

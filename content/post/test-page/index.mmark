@@ -19,6 +19,8 @@ $$
 p(x \mid \mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma}} e^{-(x-\mu)^2}{2\sigma^2}
 $$
 
+{{< relimg "plot.svg" "test figure" >}}
+
 ## This is a H2
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel purus tempor, lacinia justo non, mattis elit. Integer et risus quis mi euismod accumsan. Praesent quam sapien, scelerisque id cursus non, porta in odio. Praesent molestie et ante non volutpat. Quisque ac massa dignissim, elementum ante quis, cursus tortor. Fusce varius tellus est, id placerat augue dictum a. Phasellus congue, ligula in imperdiet viverra, ipsum purus ornare metus, eu ultricies purus mauris at leo. Curabitur non aliquet mauris, at rhoncus mauris. Pellentesque id erat in odio tincidunt aliquet. In hac habitasse platea dictumst. Proin non ante risus. Nulla laoreet, nulla ac scelerisque iaculis, lectus arcu posuere massa, vitae interdum massa ipsum in tortor. Nam luctus faucibus nunc, ut suscipit mi tincidunt cursus. Vivamus malesuada nibh et semper tempus. Aenean nec commodo justo.
@@ -45,3 +47,11 @@ Sed gravida pellentesque mauris, `Base.Terminals` id ultricies libero viverra ne
 ### This is H4, almost never used
 
 Integer id magna aliquam, porttitor sapien in, mattis neque. Curabitur porta eget metus at elementum. Donec convallis aliquet tortor sed egestas. Donec faucibus facilisis dolor, sit amet varius eros congue a. Proin eu tellus condimentum, consequat ex at, consectetur lectus. Cras sed ligula varius, facilisis purus ac, ultrices arcu. Vivamus pharetra nunc a pellentesque sagittis. Suspendisse posuere orci vitae finibus elementum. Vivamus ac consectetur urna. Sed ut dui posuere, porta massa eleifend, blandit sapien. Nunc tempus ante erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet auctor sapien.
+
+code linked and displayed:
+
+{{< inclsrc "julia" "code.jl" >}}
+
+code linked:
+
+{{< refsrc "code.jl" >}}
