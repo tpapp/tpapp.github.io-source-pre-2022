@@ -261,7 +261,7 @@ small, .font_small {
     font-size: 0.8em; }
     #content .footnotes hr {
       border: none;
-      height: 0.5px;
+      height: 1px;
       background-color: #aaa;
       margin-top: 1.5em;
       margin-bottom: 0.2em;
