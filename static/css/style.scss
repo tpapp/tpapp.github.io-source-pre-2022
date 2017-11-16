@@ -217,6 +217,7 @@ small, .font_small {font-size: 0.833em;}
         color: $lightfg;
         text-decoration: underline;
         text-decoration-color: $fadefg;
+        text-decoration-skip: ink;
     }
     a:hover {
         color: $lighthover;
