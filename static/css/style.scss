@@ -1,18 +1,22 @@
 /* colors: mostly gray, except link hover */
+$greyblue: #4682b4;             // steel blue
+$darkgreyblue: #4076A3;         // bit darker
 $lightbg: #fff;
 $lightfg: #222;
-$lighthover: #4682b4;
+$lighthover: $darkgreyblue;
 $fadefg: #aaa;
-$fadehover: #4682b4;
+$fadehover: $greyblue;
 $darkbg: #333;
 $darkfg: #eee;
-$darkhover: #4682b4;
+$darkhover: $greyblue;
+$codefg: $darkgreyblue;         // bit darker for code
 
 $content_width: 40em;
 $content_padding: 8em;
 $smallscreen_padding: 0.5em;
 
 $small_screen_width: $content_width + 2 * $smallscreen_padding;
+
 
 @mixin small_screen {
   @media screen and (max-width: $small_screen_width) {
@@ -314,9 +318,13 @@ small, .font_small {font-size: 0.833em;}
         padding-bottom: 3px;
         overflow: auto;
         font-family: 'Ubuntu Mono', monospace;
+        code {
+            color: $lightfg;
+        }
     }
     code {
         font-family: 'Ubuntu Mono', monospace;
+        color: $codefg;
     }
     ul.mainlist {
         list-style-type: none;

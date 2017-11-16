@@ -115,7 +115,7 @@ small, .font_small {
         border-width: 0.5px;
         border-color: #aaa; }
       #navbar .dropdown .dropdown-content a:hover {
-        color: #4682b4; }
+        color: #4076A3; }
       #navbar .dropdown .dropdown-content p .dropdown-header {
         color: #eee;
         text-align: center;
@@ -165,7 +165,7 @@ small, .font_small {
     text-decoration-color: #aaa;
     text-decoration-skip: ink; }
   #content a:hover {
-    color: #4682b4; }
+    color: #4076A3; }
   #content .tags {
     overflow: hidden; }
     #content .tags a {
@@ -237,8 +237,11 @@ small, .font_small {
     padding-bottom: 3px;
     overflow: auto;
     font-family: 'Ubuntu Mono', monospace; }
+    #content pre code {
+      color: #222; }
   #content code {
-    font-family: 'Ubuntu Mono', monospace; }
+    font-family: 'Ubuntu Mono', monospace;
+    color: #4076A3; }
   #content ul.mainlist {
     list-style-type: none;
     padding: 0;
