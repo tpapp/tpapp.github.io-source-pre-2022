@@ -76,7 +76,7 @@ small, .font_small {
       height: 1em;
       vertical-align: -0.1em; }
   #navbar a:hover {
-    color: #4682b4; }
+    color: #4f93cc; }
   #navbar .dropdown {
     position: relative;
     display: inline; }
@@ -115,7 +115,7 @@ small, .font_small {
         border-width: 0.5px;
         border-color: #aaa; }
       #navbar .dropdown .dropdown-content a:hover {
-        color: #4076A3; }
+        color: #3c6e99; }
       #navbar .dropdown .dropdown-content p .dropdown-header {
         color: #eee;
         text-align: center;
@@ -165,7 +165,7 @@ small, .font_small {
     text-decoration-color: #aaa;
     text-decoration-skip: ink; }
   #content a:hover {
-    color: #4076A3; }
+    color: #3c6e99; }
   #content .tags {
     overflow: hidden; }
     #content .tags a {
@@ -241,7 +241,7 @@ small, .font_small {
       color: #222; }
   #content code {
     font-family: 'Ubuntu Mono', monospace;
-    color: #4076A3; }
+    color: #3c6e99; }
   #content ul.mainlist {
     list-style-type: none;
     padding: 0;

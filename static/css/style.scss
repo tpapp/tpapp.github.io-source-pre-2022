@@ -1,6 +1,7 @@
 /* colors: mostly gray, except link hover */
 $greyblue: #4682b4;             // steel blue
-$darkgreyblue: #4076A3;         // bit darker
+$darkgreyblue: #3c6e99;         // bit darker
+$lightgreyblue: #4f93cc;        // bit lighter
 $lightbg: #fff;
 $lightfg: #222;
 $lighthover: $darkgreyblue;
@@ -8,8 +9,8 @@ $fadefg: #aaa;
 $fadehover: $greyblue;
 $darkbg: #333;
 $darkfg: #eee;
-$darkhover: $greyblue;
-$codefg: $darkgreyblue;         // bit darker for code
+$darkhover: $lightgreyblue;
+$codefg: $darkgreyblue;         // inline code
 
 $content_width: 40em;
 $content_padding: 8em;
