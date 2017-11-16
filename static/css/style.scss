@@ -9,7 +9,7 @@ $darkfg: #eee;
 $darkhover: #4682b4;
 $codebg: #f7f7f7;
 
-$content_width: 50em;
+$content_width: 40em;
 $content_padding: 8em;
 $smallscreen_padding: 0.5em;
 
@@ -23,6 +23,10 @@ $small_screen_width: $content_width + 2 * $smallscreen_padding;
 
 html {
     font-size: 1em;
+    box-sizing: border-box;
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures contextual;
+    font-feature-settings: "kern", "liga", "clig", "calt";
 }
 
 body {
@@ -32,27 +36,38 @@ body {
     padding: 0;
     background-color: $lightbg;
     color: $lightfg;
-    font-family: 'Open Sans', sans-serif;
-    line-height: 1.60;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: normal;
+    line-height: 1.50;
 }
 
 h1, h2, h3, h4 {
-    margin: 1em 0 0.5em;
-    font-family: 'Oswald', sans-serif;
-    font-weight: normal;
-    line-height: 1.2;
+    margin: 1.4em 0 0.7em 0;
+    font-weight: 600;
+    line-height: 1em;
 }
 
-p {
-    margin-top: 0.5em;
-    margin-bottom: 1em;
+p, ol, ul, .highlight {
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
 }
 
-h2 {font-size: 1.728em;}
+h1 {
+    font-size: 1.331em;
+}
 
-h3 {font-size: 1.44em;}
+h2 {
+    font-size: 1.21em;
+}
 
-h4 {font-size: 1.2em;}
+h3 {
+    font-size: 1.1em;
+}
+
+h4 {
+    font-size: 1em;
+}
+
 
 small, .font_small {font-size: 0.833em;}
 
@@ -282,14 +297,17 @@ small, .font_small {font-size: 0.833em;}
     }
     pre {
         margin: 0;
-        padding: 3px 8px;
-        font-family: 'Roboto Mono', monospace;
+        padding-left: 3px;
+        padding-top: 3px;
+        padding-bottom: 3px;
         overflow: auto;
-        background-color: $codebg;
-        font-size: 0.95em;
+        letter-spacing: -0.5px;
     }
     code {
-        font-family: 'Roboto Mono', monospace;
+        font-family: 'Source Code Pro', monospace;
+        font-size: 0.9em;
+        font-weight: 400;
+        letter-spacing: -0.5px;
     }
     ul.mainlist {
         list-style-type: none;
@@ -321,6 +339,10 @@ small, .font_small {font-size: 0.833em;}
             margin-bottom: 0.2em;
             margin-left: 0;
             width: 10em;
+        }
+        a {
+            /* fix links for sup */
+            text-decoration: none;
         }
         ol {
             margin-top: 0.2em;
