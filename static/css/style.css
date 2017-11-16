@@ -236,12 +236,9 @@ small, .font_small {
     padding-top: 3px;
     padding-bottom: 3px;
     overflow: auto;
-    letter-spacing: -0.5px; }
+    font-family: 'Ubuntu Mono', monospace; }
   #content code {
-    font-family: 'Source Code Pro', monospace;
-    font-size: 0.9em;
-    font-weight: 400;
-    letter-spacing: -0.5px; }
+    font-family: 'Ubuntu Mono', monospace; }
   #content ul.mainlist {
     list-style-type: none;
     padding: 0;

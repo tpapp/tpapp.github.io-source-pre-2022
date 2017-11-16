@@ -314,13 +314,10 @@ small, .font_small {font-size: 0.833em;}
         padding-top: 3px;
         padding-bottom: 3px;
         overflow: auto;
-        letter-spacing: -0.5px;
+        font-family: 'Ubuntu Mono', monospace;
     }
     code {
-        font-family: 'Source Code Pro', monospace;
-        font-size: 0.9em;
-        font-weight: 400;
-        letter-spacing: -0.5px;
+        font-family: 'Ubuntu Mono', monospace;
     }
     ul.mainlist {
         list-style-type: none;
