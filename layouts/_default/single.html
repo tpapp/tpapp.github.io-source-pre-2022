@@ -4,23 +4,24 @@
 {{- .Date.Format "2006/01/02" }}
 {{- partial "tags.html" . }}
 
-{{ .Content }}
-
 {{ if or .Prev .Next }}
 <div id="pagenav">
   {{ if .Prev }}
-  <span class="pagenav-label">next:</span>&nbsp;
+  <span class="pagenav-label">next post:</span>&nbsp;
   <a href="{{ .Prev.Permalink }}">{{ .Prev.Title }}</a>
   {{ end }}
   {{ if .Next }}
   {{ if .Prev }}
   <br/>
   {{ end }}
-  <span class="pagenav-label">previous:</span>&nbsp;
+  <span class="pagenav-label">previous post:</span>&nbsp;
   <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
   {{ end }}
 </div>
 {{ end }}
+
+{{ .Content }}
+
 {{ template "_internal/disqus.html" . }}
 </div>
 
