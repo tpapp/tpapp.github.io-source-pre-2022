@@ -1,0 +1,25 @@
++++
+date = 2017-11-18T10:48:30+01:00
+draft = false
+title = "Checking uncommitted changes when opening a file in Emacs"
+slug = ""
+categories = [""]
+tags = ["emacs", "magit"]
++++
+
+Alas, the following happens all too frequently: I am working on code, some interruption happens, and I fail to commit the changes coherently into the repository.
+
+Next time I open the file, perhaps to work on some other feature, I forget that I have *uncommitted changes* and work on something new. When staging, I realize the mistake and have to spend time disentangling the mess.
+
+The following Emacs Lisp snippet takes care of this problem by checking for uncommitted changes and taking me to the `magit` popup if there is something I should deal with:
+
+```emacs-lisp
+(cl-defun tkpapp/check-file-and-popup (&optional (file (buffer-file-name)))
+  "If the file is version controlled with git and has uncommitted
+changes, open the magit status popup."
+  (require 'magit-core)
+  (when (and file (magit-anything-modified-p t file))
+    (magit-status)))
+
+(add-hook 'find-file-hook 'tkpapp/check-file-and-popup)
+```
