@@ -1,7 +1,7 @@
 +++
 date = 2017-11-16T11:08:26+01:00
 draft = true
-title = "Test page for CSS formatting"
+title = "Test page for CSS formatting. This post has a super-long title to see how it is broken. I mean really, really long."
 slug = ""
 categories = [""]
 tags = ["test-tag"]
@@ -27,7 +27,7 @@ $$
 
 [joys of skipping](testlink)
 
-## This is a H2
+## This is a H2. It has a super-long title to see how it is broken. I mean really, really long.
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel purus tempor, lacinia justo non, mattis elit. Integer et risus quis mi euismod accumsan. Praesent quam sapien, scelerisque id cursus non, porta in odio. Praesent molestie et ante non volutpat. Quisque ac massa dignissim, elementum ante quis, cursus tortor. Fusce varius tellus est, id placerat augue dictum a. Phasellus congue, ligula in imperdiet viverra, ipsum purus ornare metus, eu ultricies purus mauris at leo. Curabitur non aliquet mauris, at rhoncus mauris. Pellentesque id erat in odio tincidunt aliquet. In hac habitasse platea dictumst. Proin non ante risus. Nulla laoreet, nulla ac scelerisque iaculis, lectus arcu posuere massa, vitae interdum massa ipsum in tortor. Nam luctus faucibus nunc, ut suscipit mi tincidunt cursus. Vivamus malesuada nibh et semper tempus. Aenean nec commodo justo.
 
