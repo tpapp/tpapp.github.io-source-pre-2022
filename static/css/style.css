@@ -23,8 +23,7 @@ h1, h2, h3, h4 {
   line-height: 1; }
 
 p, ol, ul {
-  margin-top: 0.875rem;
-  margin-bottom: 0.875rem; }
+  margin: 0.875rem 0; }
 
 h1 {
   font-size: 1.331em; }
@@ -229,12 +228,8 @@ small, .font_small {
         background-color: #333;
         color: #eee; }
   #content pre {
-    margin: 0;
-    margin-top: 0.875rem;
-    margin-bottom: 0.875rem;
-    padding-left: 3px;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    margin: 0.875rem 0;
+    padding: 3px;
     overflow: auto;
     font-family: 'Ubuntu Mono', monospace; }
     #content pre code {
@@ -247,10 +242,12 @@ small, .font_small {
     padding: 0;
     margin: 0;
     text-align: left; }
-    #content ul.mainlist li p.additionalinfo {
-      padding: 0;
-      margin: 0;
-      font-size: 0.833em; }
+    #content ul.mainlist li {
+      margin: 0.875rem 0; }
+      #content ul.mainlist li p.additionalinfo {
+        padding: 0;
+        margin: 0;
+        font-size: 0.833em; }
   #content img#tamaskpapp {
     float: right;
     width: 10em;
@@ -263,15 +260,12 @@ small, .font_small {
       border: none;
       height: 1px;
       background-color: #aaa;
-      margin-top: 1.5em;
-      margin-bottom: 0.2em;
-      margin-left: 0;
+      margin: 1.5em 0 0.2em 0;
       width: 10em; }
     #content .footnotes a {
       /* fix links for sup */
       text-decoration: none; }
     #content .footnotes ol {
-      margin-top: 0.2em;
-      margin-bottom: 0.2em; }
+      margin: 0.2em 0; }
 
 /*# sourceMappingURL=style.css.map */

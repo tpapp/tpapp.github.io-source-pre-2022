@@ -56,8 +56,7 @@ h1, h2, h3, h4 {
 }
 
 p, ol, ul {
-    margin-top: 0.5 * $vertical-rhythm;
-    margin-bottom: 0.5 * $vertical-rhythm;
+    margin: 0.5 * $vertical-rhythm 0;
 }
 
 h1 {
@@ -311,12 +310,8 @@ small, .font_small {font-size: 0.833em;}
         }
     }
     pre {
-        margin: 0;
-        margin-top: 0.5 * $vertical-rhythm;
-        margin-bottom: 0.5 * $vertical-rhythm;
-        padding-left: 3px;
-        padding-top: 3px;
-        padding-bottom: 3px;
+        margin: 0.5 * $vertical-rhythm 0;
+        padding: 3px;
         overflow: auto;
         font-family: 'Ubuntu Mono', monospace;
         code {
@@ -333,6 +328,7 @@ small, .font_small {font-size: 0.833em;}
         margin: 0;
         text-align: left;
         li {
+            margin: 0.5 * $vertical-rhythm 0;
             p.additionalinfo {
                 padding: 0;
                 margin: 0;
@@ -353,9 +349,7 @@ small, .font_small {font-size: 0.833em;}
             border: none;
             height: 1px;
             background-color: $fadefg;
-            margin-top: 1.5em;
-            margin-bottom: 0.2em;
-            margin-left: 0;
+            margin: 1.5em 0 0.2em 0;
             width: 10em;
         }
         a {
@@ -363,8 +357,7 @@ small, .font_small {font-size: 0.833em;}
             text-decoration: none;
         }
         ol {
-            margin-top: 0.2em;
-            margin-bottom: 0.2em;
+            margin: 0.2em 0;
         }
         font-size: 0.8em;
     }
