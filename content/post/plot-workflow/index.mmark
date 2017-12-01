@@ -1,0 +1,60 @@
++++
+date = 2017-12-01T09:56:00+01:00
+draft = false
+title = "Publication quality plots in Julia"
+slug = ""
+categories = [""]
+tags = ["julia", "plots"]
++++
+
+In light of recent discussions on Julia's [Discourse forum](https://discourse.julialang.org/) about getting “publication-quality” or simply “nice” plots in Julia, I thought it would be worthwhile to briefly summarize what works for me.^[Code in this post was written in December 2017, you may need to tweak it if the API of the packages changes.] If you are a seasoned Julia user, this post may have nothing new for you, but I hope that newcomers to Julia find it useful.
+
+## Generate the data
+
+I try to separate *data generation* and *plotting*. The first may be time-consuming (some calculations can take hours or days to run), and I find it best to save the results independently of any plotting. Recently I was sitting at a conference where a presentation about a really interesting topic had some plots that were extremely hard to see: if I remember correctly, something like 10x2 subplots, with almost all fine detail lost due to the resolution of the projector or the human eye. When someone in the audience asked about this, the presenting author replied that he is aware of the issue, but remaking the plots would involve rerunning the calculations, which take weeks. Saving the data separately will ensure that you are never in this situation; also, you can benefit from updates to plotting libraries when tweaking your plots.
+
+For saving results, [JLD2](https://github.com/simonster/JLD2.jl) is probably the most convenient tool: while it is technically work in progress, it is stable, fast, and convenient.^[In the worst case scenario, you can always regenerate the data ☺] The key question is *where* to save the data: I find it best to use a consistent path that you can just include in scripts.
+
+You have several options:
+
+1. define a global variable in your `~/.juliarc` for your projects, and construct a path with `joinpath`,
+
+2. if you have packaged your code, `Pkg.dir` can be used to obtain a subdirectory in the package root,
+
+3. if your code is in a module, you can wrap `@__DIR__` in a function to obtain a directory.
+
+For this blog post I used the first option, while in practice I use the second and the third.
+
+To illustrate plots, I use the code below to generate random variates for [sample skewness](https://en.wikipedia.org/wiki/Skewness#Sample_skewness), and save it.
+
+{{< inclsrc "julia" "data.jl" >}}
+
+## Make the plot
+
+No plotting so far, so let's remedy that. I use [Plots.jl](http://docs.juliaplots.org/latest/), which is a metapackage that unifies syntax for plotting via various *plotting backends* in Julia. I find this practical, because I can quickly switch backends for different purposes, and experiment with various options when I find the output suboptimal. The price you pay for this flexibility is *compilation time*, a known issue which means that you have to wait a bit to get your first plot. Separating plotting and data generation has the advantage that once I fire up the plotting infrastructure, I switch to “plotting mode” and clean up several plots at the same time.
+
+Users frequently ask what the “best” backend is. This all depends on your needs, but these days I use the `pgfplots()` backend almost exclusively.^[Note that you need a [working TeX installation](https://github.com/sisl/TikzPictures.jl), which is easy to obtain on Linux.] The `gr()` backend is also useful, because it is very fast.
+
+Time to tweak the plot! I find the [attributes](http://docs.juliaplots.org/latest/attributes/) documentation the most useful for this. For this plot I need axis labels, a title, and prefer to disable the legend since I am plotting a single series. I am also using [LaTeXStrings.jl](https://github.com/stevengj/LaTeXStrings.jl), which means that I can use LaTeX-compatible syntax for labels seamlessly (notice the `L` before the string).
+
+{{< inclsrc "julia" "plot.jl" >}}
+
+Having generated the plot, I save it in various formats with `savefig`. The SVG output is shown below.
+
+{{< relimg "sample_skewness.svg" "The plot" >}}
+
+## How to get help
+
+If you cannot achieve the desired output, you can
+
+1. reread the [Plots.jl manual](http://docs.juliaplots.org/latest/),
+
+2. study the [example plots](https://github.com/JuliaPlots/ExamplePlots.jl),
+
+3. ask for help in the [Visualization topic](https://discourse.julialang.org/c/domain/viz).
+
+For the third option, make sure you include a *self-contained minimal working example*,^[You should use triple-backticks ```` ``` ```` to format your code.] which also generates or loads the data, so that others can run your code as is. Randomly generated data should be fine, or standard datasets from [RDatasets.jl](https://github.com/johnmyleswhite/RDatasets.jl).
+
+Sometimes you will find that the feature you are looking for is not (yet) supported. You should check if there is an [open issue](https://github.com/JuliaPlots/Plots.jl/issues) for your problem (the discussion forum linked above is useful for this), and if not, open one.
+
+When asking for help or just discussing plotting libraries in Julia, please keep in mind that they are a community effort with volunteers devoting their time to address a very difficult problem. Plotting is not a well-defined exercise, it involves a lot of heuristics and special cases, and most languages took years to get it right (for a given value of “right”). Make it easy for people to help you by making a reproducible, clean MWE: it is very hard to explain how to improve your plot without the actual code and output.
