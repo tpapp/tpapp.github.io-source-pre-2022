@@ -52,4 +52,4 @@ I am using [helm](https://emacs-helm.github.io/helm/) pervasively. `helm-occur` 
 
 You can move across these matches, jump to one in an adjacent buffer while keeping this list open, or save the list for later use. Its big brother `helm-do-grep-ag` is even more powerful, using [ag](https://geoff.greer.fm/ag/) to find something in a directory tree.
 
-With these two tools, I find navigating files around 5K LOC very convenient — the better I learn Emacs, the larger my threshold for a “large” file becomes.^[In case you are wandering, the largest files are around 6K LOC in Julia `Base` at the moment.]
+With these two tools, I find navigating files around 5K LOC very convenient — the better I learn Emacs, the larger my threshold for a “large” file becomes.^[In case you are wondering, the largest files are around 6K LOC in Julia `Base` at the moment.]
