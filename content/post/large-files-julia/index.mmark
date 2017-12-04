@@ -1,0 +1,55 @@
++++
+date = 2017-12-04T15:32:41+01:00
+draft = false
+title = "Working with large Julia source files in Emacs"
+slug = ""
+categories = [""]
+tags = ["julia", "emacs"]
++++
+
+When writing software, especially libraries, a natural question is how to organize source code into files. Some languages, eg Matlab, encourage a very fragmented style (one function per file), while for some other languages (C/C++), a separation between the interface (`.h`) and the implementation (`.c`/`.cpp`) is traditional.
+
+Julia has no such constraint: `include` allows the source code for a module to be organized into small pieces, possibly scattered in multiple directories, or it can be a single monolithic piece of code. The choice on this spectrum is up to the authors, and is largely a matter of personal preference.
+
+When I started working with Julia, I was following the example of some prominent packages, and organized code into small pieces (~ 500 LOC). Lately, whenever I refactored my code, I ended up putting it in a single file.
+
+I found the following Emacs tools very helpful for navigation.
+
+## Form feeds and page-break-lines-mode
+
+Form feed, or `\f`, is an ASCII control character that was used to request a new page in line printers. Your editor may display it as `^L`. It has a long history of being used as a separator, and Emacs supports it in various ways.
+
+By default, `C-x [` and `C-x ]` take you to the previous and next form feed separators. Combined with numerical prefixes, eg `C-3 C-x [`, you can jump across multiple ones very quickly. Other commands with `page` in their name allow narrowing, marking, and other functions.
+
+Many Emacs packages provide extra functionality for page breaks. My favorite is [page-break-lines](https://github.com/purcell/page-break-lines), which replaces `^L` with a horizontal line, so that the output looks like this:
+
+<pre style="color: #262626; background-color: #ded6c5;">
+<span style="color: #2020cc; font-weight: bold;">export</span>
+    ML_estimator
+
+<hr style="background-color: #008b45; height: 1px; border: 0 none;"><span style="color: #008b45;"># </span><span style="color: #008b45;">general API
+</span>
+<span style="color: #fa5151;">"""
+    ML_estimator(ModelType, data...)
+
+Estimate `ModelType` using maximum likelihood
+on `data`, which  is model-specific.
+"""</span>
+<span style="color: #2020cc; font-weight: bold;">function</span> <span style="color: #2c53ca;">ML_estimator</span> <span style="color: #2020cc; font-weight: bold;">end</span>
+</pre>
+
+## Finding things quickly
+
+I am using [helm](https://emacs-helm.github.io/helm/) pervasively. `helm-occur` is very handy for listing all occurrences of something, and navigating them. The following is an except from `base/operators.jl`, looking for `isless`:
+
+<pre style="color: #262626; background-color: #ded6c5;">
+<span style="color: #00ced1; text-decoration: underline;">operators.jl</span>:<span style="color: #ff7f00;">213</span>:types with a canonical total order should implement `<span style="color: #b00000;">isless</span>`.
+<span style="color: #00ced1; text-decoration: underline;">operators.jl</span>:<span style="color: #ff7f00;">227</span>:&lt;(x, y) = <span style="color: #b00000;">isless</span>(x, y)
+<span style="color: #00ced1; text-decoration: underline;">operators.jl</span>:<span style="color: #ff7f00;">300</span>:# this definition allows Number types to implement &lt; instead of <span style="color: #b00000;">isless</span>,
+<span style="color: #00ced1; text-decoration: underline;">operators.jl</span>:<span style="color: #ff7f00;">302</span>:<span style="color: #b00000;">isless</span>(x::Real, y::Real) = x&lt;y
+<span style="color: #00ced1; text-decoration: underline;">operators.jl</span>:<span style="color: #ff7f00;">303</span>:lexcmp(x::Real, y::Real) = <span style="color: #b00000;">isless</span>(x,y) ? -1 : ifelse(<span style="color: #b00000;">isless</span>(y,x), 1, 0)
+</pre>
+
+You can move across these matches, jump to one in an adjacent buffer while keeping this list open, or save the list for later use. Its big brother `helm-do-grep-ag` is even more powerful, using [ag](https://geoff.greer.fm/ag/) to find something in a directory tree.
+
+With these two tools, I find navigating files around 5K LOC very convenient — the better I learn Emacs, the larger my threshold for a “large” file becomes.^[In case you are wandering, the largest files are around 6K LOC in Julia `Base` at the moment.]
