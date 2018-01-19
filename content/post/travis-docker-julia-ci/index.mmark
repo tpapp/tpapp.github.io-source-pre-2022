@@ -1,0 +1,26 @@
++++
+date = 2018-01-19T08:47:06+01:00
+draft = false
+title = "Continuous integration for Julia packages using Docker"
+slug = ""
+categories = [""]
+tags = ["julia", "unit testing", "docker"]
++++
+
+This post may be useful for maintainers of Julia packages which require a large binary dependencies on CI services like Travis.
+
+I have recently started using Kristoffer Carlsson's excellent [PGFPlotsX](https://github.com/KristofferC/PGFPlotsX.jl) for plotting. The package is a thin wrapper which emits LaTeX code for use with [pgfplots](http://pgfplots.sourceforge.net/), which is extremely versatile and well-documented.^[Using this package accelerated my plotting workflow in Julia. A post on this will follow soon.] However, since most of the action happens in LaTeX, unit testing requires a lot of binary dependencies, including the [TeXLive](https://tug.org/texlive/) suite and some related packages. This is not a problem on one's own machine where these would need to be installed just once, but when I submitted PRs, tests on Travis timed out more often than not because it had to install all of these for every run using `apt-get`.
+
+The documentation of Travis suggested that [docker](http://docker.com/) may be a solution for such cases, and I have been looking an opportunity to experiment with it anyway. After reading their tutorial it was relatively quick to produce an image based on plain vanilla Ubuntu 17.10, which is available as a docker image to build on, and the required TeXLive and related packages, plus some utilities.
+
+During building the image, I download the binaries for the stable version Julia, while `nightly` is downloaded on demand. This speeds up CI by 40–50 seconds for `stable`.
+
+This is how it is run:
+
+1. the directory of the Julia package is mounted in the container at `/mnt`,
+
+2. `Pkg.clone()` and testing proceed as usual,
+
+3. coverage results are copied back to `/mnt` when done.
+
+The resulting image runs in 3–4 minutes consistently. In case someone finds it useful for Julia packages with similarly large binary dependencies, I made it available as [`texlive-julia-minimal-docker`](https://github.com/tpapp/texlive-julia-minimal-docker) on Github.^[“Minimal” turns out to be a misnomer, since some dependencies end up requiring X11 and the image is >700GB.] Naturally, for projects with other large binary dependencies, one would install different Ubuntu packages or binaries.
