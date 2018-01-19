@@ -159,12 +159,10 @@ small, .font_small {
   #content p {
     text-align: justify; }
   #content a {
-    color: #222;
+    color: #3c6e99;
     text-decoration: underline;
-    text-decoration-color: #aaa;
+    text-decoration-color: #3c6e99;
     text-decoration-skip: ink; }
-  #content a:hover {
-    color: #3c6e99; }
   #content .tags {
     overflow: hidden; }
     #content .tags a {

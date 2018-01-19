@@ -11,6 +11,7 @@ $darkbg: #333;
 $darkfg: #eee;
 $darkhover: $lightgreyblue;
 $codefg: $darkgreyblue;         // inline code
+$linkfg: $darkgreyblue;         // links in content
 
 $content_width: 40em;
 $content_padding: 8em;
@@ -217,13 +218,10 @@ small, .font_small {font-size: 0.833em;}
         text-align: justify;
     }
     a {
-        color: $lightfg;
+        color: $linkfg;
         text-decoration: underline;
-        text-decoration-color: $fadefg;
+        text-decoration-color: $linkfg;
         text-decoration-skip: ink;
-    }
-    a:hover {
-        color: $lighthover;
     }
     .tags {
         overflow: hidden;
