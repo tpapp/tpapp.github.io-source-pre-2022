@@ -1,2 +1,15 @@
-#!/bin/sh
-hugo new --editor emacsclient-bg post/$1/index.mmark &
+#!/bin/bash
+if (($# != 1))
+then
+    printf "Use as\n\n\t$0 <post-directory-name>\n\nto create a new post and call your editor on it."
+else
+    NEWNAME=post/$1/index.mmark
+    NAME=content/$NEWNAME
+    if [ -e $NAME ]
+    then
+        printf "$NAME already exists, not creating.\n"
+    else
+        hugo new $NEWNAME
+    fi
+    $EDITOR $NAME &
+fi
