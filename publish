@@ -3,7 +3,9 @@
 # documentation.
 
 # copy static files
-cp ~/doc/cv/cv.pdf ./static/pdf/cv.pdf
+PDFS=./static/pdf/
+cp ~/doc/cv/cv.pdf $PDFS/cv.pdf
+cp ~/research/consistent-local-continuous/doc/consistent-local-continuous.pdf $PDFS
 
 # erases the contents of the target directory without asking, then
 # pushes that as a git repo
