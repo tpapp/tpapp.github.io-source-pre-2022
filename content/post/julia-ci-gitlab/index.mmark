@@ -1,0 +1,40 @@
++++
+date = 2018-03-08T17:06:54+01:00
+draft = false
+title = "Setting up Julia with continuous integration on Gitlab"
+slug = ""
+categories = [""]
+tags = ["julia", "gitlab", "unit testing"]
++++
+
+As an academic, I picked up good practices for programming mostly by osmosis. My approach to “testing” software went through the following stages:
+
+1. See if the code runs (this got me through my undergrad years).
+
+2. Check if the results “look OK”, then forget about testing.
+
+3. Compare results occasionally to known results from papers or other code (eg in a different language).
+
+4. Write some unit tests *ex post*, as an afterthought after the code is finished (time pressure helps to ensure that overtesting is never a problem).
+
+5. Use unit tests from the very beginning, especially before optimizing and refactoring code.
+
+6. Set up automatic testing, as part of *continuous integration*.
+
+I think that 1–3 above is a pretty usual path, naturally traversed after the recognition that *some* testing would be nice, but lacking the knowledge of *how to implement it* in a consistent manner. This is comparable to using copies of directories as crude attempts at “version control”.
+
+Later, I picked up 4–6 while being exposed to these ideas when learning about new languages. Automated unit testing is one of those things one does not miss until learning about it, then subsequently cannot imagine doing without. In a research context, the two main advantages are *scientific integrity* — I should make a best effort to ensure that my results are correct — and *dealing with bugs early*. While the first one is abstract and philosophical, the second is a practical concern: I found that if I skimp on testing, the bugs show up much later, usually at an inconvenient time, and I will have to spent time locating the bug (not always trivial, especially with numerical code) and switch context to something I was working on months ago. It is my experience that while tests can be tedious to write, time spent on them is a very good investment.
+
+I knew about unit tests before coming to Julia, but learned about automated CI in the Julia community. This was because package template libraries “do the right thing” by making it very easy to set up an automated testing framework: for example, `PkgDev.generate` creates the appropriate test configuration for [Travis CI](http://travis-ci.org/) and various coverage services.
+
+I never cease to be amazed by the fact that these services are available for free for public / open source projects, which is very generous of these providers. However, occasionally one would like to keep the project private for a little while. The usual scenario for me is working on code that is related to a paper, which I plan to make public with the latter; in this case one would need the pro (non-free) version of Travis and related tools.
+
+Alternatively, [Gitlab](https://gitlab.com/) offers CI/CD with private repositories. I am exploring this at the moment for various projects, and boiled down the necessary configuration into the repository [GitlabJuliaDemo.jl](https://gitlab.com/tkpapp/GitlabJuliaDemo.jl). It has
+
+1. a CI setup for `Pkg.test`,
+
+2. a coverage *summary* as a percentage.
+
+While coverage analysis could be [automated](https://about.gitlab.com/2016/11/03/publish-code-coverage-report-with-gitlab-pages/) too with a custom Docker image, I leave his for future work.^[In the next post I will talk about local coverage analysis in Julia.]
+
+So far, I am very satisfied with Gitlab. The interface is well-designed, clean, and intuitive; tests complete in a few minutes (just like Travis).
