@@ -359,4 +359,11 @@ small, .font_small {font-size: 0.833em;}
         }
         font-size: 0.8em;
     }
+    iframe {
+        margin: 0;
+        padding: 0;
+        border: none;
+        width: 100%;
+        height: 500px;
+    }
 }

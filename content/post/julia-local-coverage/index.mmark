@@ -27,4 +27,4 @@ This is how it works:
 
 This is what it looks like for this package:
 
-<iframe src="/misc/coverage-example/src/LocalCoverage.jl.gcov.html" width="100%" height="400px"></iframe>
+<iframe src="/misc/coverage-example/src/LocalCoverage.jl.gcov.html"></iframe>
