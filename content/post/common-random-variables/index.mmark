@@ -1,0 +1,200 @@
++++
+date = 2018-03-23T15:23:16+01:00
+draft = false
+title = "Common random variables: an optimization case study"
+slug = ""
+categories = [""]
+tags = ["julia", "Bayesian", "MCMC", "indirect inference"]
++++
+
+{{< juliaversion "0.6.2" >}}
+
+## Motivation
+
+When simulating models with random components, it is frequently advantageous to decompose the structure into
+
+1. *parameters* $$\theta$$ that we need to characterize structural relationships,
+
+2. *noise* $$\varepsilon$$  that is independent of parameters,
+
+3. a function $$f(\theta, \varepsilon)$$ that generates observed data or moments.
+
+Doing this allows us to use [common random variables](https://en.wikipedia.org/wiki/Variance_reduction#Common_Random_Numbers_(CRN)) (aka common random *numbers*), which is a technique which simply keeps $$\varepsilon$$ fixed for different $$\theta$$. This can help with making $$f$$ differentiable, which allows the use of derivative-based optimization algorithms (eg for maximum likelihood or [MAP](https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation)) or derivative-based MCMC methods. It is also used to reduce the variance of simulated moments.
+
+When implementing this technique in Julia, I frequently create a wrapper structure that saves the $$\varepsilon$$, allocating an `Array` which can be updated in place. Since a redesign of [DynamicHMC.jl](https://github.com/tpapp/DynamicHMC.jl/) is coming up which will accommodate simulated likelihood methods in a more disciplined manner, and I wanted to explore other options, most importantly [StaticArrays.jl](https://github.com/JuliaArrays/StaticArrays.jl).
+
+Here I benchmark the alternatives for Julia `v0.6.2` using a simple toy model. **TL;DR** for the impatient: `StaticArrays.jl` is 150x faster, and this does not depend on using immutable or mutable `StaticArray`s, or even reallocating every time new $$\varepsilon$$s are generated.
+
+## Problem setup
+
+The setup is simple: we draw $$M$$ observations, and our noise is
+
+$$
+\varepsilon_{i,j} \sim N(0, 1)
+\qquad
+\text{for } i = 1, \dots, M; j = 1, \dots, 7.
+$$
+
+Our parameters are $$\mu$$ and $$\sigma$$, and for each $$i$$ we calculate
+
+$$
+A_i = \frac17 \sum_{j=1}^7 \exp(\mu + \sigma \varepsilon_{i,j})
+$$
+
+which is the sample average after a nonlinear transformation. The $$7$$ is a bit accidental, it comes from simplifying an actual problem I am working on. We are interested in the sample average for $$A_i$$. I deliberately refrain micro-optimizing each version, to reflect how I would approach a real-life problem.
+
+We code the common interface as
+
+```julia
+using BenchmarkTools
+using StaticArrays
+using Parameters
+
+# common interface
+
+"Dimension of noise ``ϵ`` for each observation."
+const EDIM = 7
+
+"""
+Common random variables. The user needs to define
+
+1. `observation_moments`, which should use `observation_moment`,
+2. `newcrv = update!(crv)`, which returns new common random variables,
+potentially (but not necessarily) overwriting `crv`.
+"""
+abstract type CRVContainer end
+
+observation_moment(ϵ, μ, σ) = mean(@. exp(μ + σ * ϵ))
+
+average_moment(crv::CRVContainer, μ, σ) = mean(observation_moments(crv, μ, σ))
+
+"Calculate statistics, making `N` draws, updating every `L`th time."
+function stats(crv, μ, σ, N, L)
+    _stat() = (N % L == 0 && (crv = update!(crv)); average_moment(crv, μ, σ))
+    [_stat() for _ in 1:N]
+end
+```
+
+The way I wrote `stats` is representative of how I use HMC/NUTS: simulated moments on the same trajectory are calculated with the same $$\varepsilon$$s, which are updated for each trajectory. Of course, the parameters would change along the trajectory; here they don't, but this does not affect the benchmarks.
+
+The semantics of `update!` allows *both* in-place modifications and a functional style.
+
+## Using a preallocated matrix
+
+This is the standard way I would write this.^[Which will change following this blog post 😁] $$\varepsilon$$s are in columns of a matrix, which is preferable for mapping them as slices, then they are mapped using `observation_moment`.
+
+`update!` overwrites the contents.
+
+```julia
+"""
+Common random variables are stored in columns of a matrix.
+"""
+struct PreallocatedMatrix{T} <: CRVContainer
+    ϵ::Matrix{T}
+end
+
+PreallocatedMatrix(M::Int) = PreallocatedMatrix(randn(EDIM, M))
+
+update!(p::PreallocatedMatrix) = (randn!(p.ϵ); p)
+
+observation_moments(p::PreallocatedMatrix, μ, σ) =
+    vec(mapslices(ϵ -> observation_moment(ϵ, μ, σ), p.ϵ, 1))
+```
+
+## Using static vectors
+
+We share the following between various static vector implementations:
+
+```julia
+"Common random variables as a vector of vectors, in the `ϵs`."
+abstract type CRVVectors <: CRVContainer end
+
+observation_moments(p::CRVVectors, μ, σ) =
+    map(ϵ -> observation_moment(ϵ, μ, σ), p.ϵs)
+```
+
+I find the use of `map` more intuitive here than `mapslices` above.
+
+### Static vectors, container preallocated
+
+In the first version using static vectors, we keep `SVector` in a `Vector`, and update in place.
+
+```julia
+struct PreallocatedStaticCRV{K, T} <: CRVVectors
+    ϵs::Vector{SVector{K, T}}
+end
+
+PreallocatedStaticCRV(M::Int) =
+    PreallocatedStaticCRV([@SVector(randn(EDIM)) for _ in 1:M])
+
+function update!(p::PreallocatedStaticCRV)
+    @unpack ϵs = p
+    @inbounds for i in indices(ϵs, 1)
+        ϵs[i] = @SVector(randn(EDIM))
+    end
+    p
+end
+```
+
+### Mutable static vectors, overwritten
+
+We modify this to use mutable vectors — this should not make a difference.
+
+```julia
+struct MutableStaticCRV{K, T} <: CRVVectors
+    ϵs::Vector{MVector{K, T}}
+end
+
+MutableStaticCRV(M::Int) =
+    MutableStaticCRV([@MVector(randn(EDIM)) for _ in 1:M])
+
+function update!(p::MutableStaticCRV)
+    @unpack ϵs = p
+    @inbounds for i in indices(ϵs, 1)
+        randn!(ϵs[i])
+    end
+    p
+end
+```
+
+### Static vectors, allocated each time
+
+Finally, for the third solution,
+
+```julia
+struct GeneratedStaticCRV{K, T} <: CRVVectors
+    ϵs::Vector{SVector{K, T}}
+end
+
+GeneratedStaticCRV(M::Int) =
+    GeneratedStaticCRV([@SVector(randn(EDIM)) for _ in 1:M])
+
+update!(p::GeneratedStaticCRV{K, T}) where {K, T} =
+    GeneratedStaticCRV([@SVector(randn(T, K)) for _ in indices(p.ϵs, 1)])
+```
+
+## Results
+
+Running
+```julia
+@btime mean(stats(PreallocatedMatrix(100), 1.0, 0.1, 100, 10))
+@btime mean(stats(PreallocatedStaticCRV(100), 1.0, 0.1, 100, 10))
+@btime mean(stats(MutableStaticCRV(100), 1.0, 0.1, 100, 10))
+@btime mean(stats(GeneratedStaticCRV(100), 1.0, 0.1, 100, 10))
+```
+we obtain
+
+| solution                |     time | allocations |
+|-------------------------|:---------|------------:|
+| `PreallocatedMatrix`    | `230 ms` |    `22 MiB` |
+| `PreallocatedStaticCRV` | `1.5 ms` |   `102 KiB` |
+| `MutableStaticCRV`      | `1.5 ms` |   `104 KiB` |
+| `GeneratedStaticCRV`    | `1.5 ms` |   `666 KiB` |
+
+As a preview of future improvements, I tried `PreallocatedMatrix` on current `master` (which will become Julia `v0.7`, obtaining `3.5 ms` (`2.46 MiB`), which is really promising.^[The other 3 options are slow because of deprecation warnings.]
+
+The conclusion is that `StaticArrays` simplifies and speeds up my code *at the same time*. I especially like the last version (`GeneratedStaticCRV`), because it obviates the need to think about types in advance. While here the example is simple, in practice I would use automatic differentiation, which makes it more challenging to determine buffer types in advance. I expect I will transition to a more “buffer-free” style in the future, and design the interface for DynamicHMC.jl accordingly.
+
+{{< refsrc "code.jl" >}}
+
+**PS:** From now on, my blog posts with Julia code will have a banner about version information.
