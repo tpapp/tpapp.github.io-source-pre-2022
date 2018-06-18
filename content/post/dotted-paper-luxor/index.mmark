@@ -1,0 +1,20 @@
++++
+date = 2018-06-18T11:30:24+02:00
+draft = true
+title = "Making dotted graph paper in Julia with Luxor.jl"
+slug = ""
+categories = [""]
+tags = ["julia"]
++++
+
+I needed some graph paper with subdivisions at centimeters and millimetres. There are some generators online, but I found their output too heavy, visually cluttered, or simply not ideal (yes, I am very picky about these things).
+
+The obvious solution was to generate a PDF or SVG using a program. Before learning Julia, I would have just started in [`pgf/tikz`](https://sourceforge.net/projects/pgf/), and spent hours searching online to do the thing I want. `pgf/tikz` are fine tools, but I generally try to avoid programming anything nontrivial in LaTeX, so I always have to spend a lot of time debugging my code.
+
+However, being a Julia user, this was a great opportunity to try [`Luxor.jl`](https://github.com/JuliaGraphics/Luxor.jl), the “Cairo for tourists!”. This means that I don't have to immerse myself in the intricacies of its syntax and concepts; I can just dip my toes and get the results.
+
+I was not disappointed: within 15 minutes of `Pkg.add("Luxor")`, I had arrived at a solution I like. I am very satisfied with `Luxor.jl` and will probably use it in the future when I need graphics built up from primitives.
+
+{{< inclsrc "julia" "dotted_paper.jl" >}}
+
+The final PDF is <a href="dotted_paper.pdf">here</a>.
