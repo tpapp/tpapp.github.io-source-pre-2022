@@ -1,6 +1,6 @@
 +++
 date = 2018-06-18T11:30:24+02:00
-draft = true
+draft = false
 title = "Making dotted graph paper in Julia with Luxor.jl"
 slug = ""
 categories = [""]
