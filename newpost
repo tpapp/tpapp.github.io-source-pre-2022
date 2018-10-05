@@ -3,7 +3,8 @@ if (($# != 1))
 then
     printf "Use as\n\n\t$0 <post-directory-name>\n\nto create a new post and call your editor on it."
 else
-    NEWNAME=post/$1/index.mmark
+    TODAY=`date +%Y-%m-%d`
+    NEWNAME=post/$TODAY-$1/index.mmark
     NAME=content/$NEWNAME
     if [ -e $NAME ]
     then
