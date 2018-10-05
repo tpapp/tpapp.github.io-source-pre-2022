@@ -7,7 +7,7 @@ categories = [""]
 tags = ["julia", "coverage"]
 +++
 
-While [codecov.io](https://codecov.io/) and [coveralls.io](https://coveralls.io/) are fine services and very easy to set up for Github repositories with Julia packages, they become more difficult to use under some circumstances. For example, if testing requires large binaries you don't want to build every time, you need to [build a Docker image]({{< ref "post/travis-docker-julia-ci/index.mmark" >}}) to run testing and obtain coverage information. Also, if your test scripts take a long time and you have access to a powerful computer, you might want to just run coverage locally when working on the code.
+While [codecov.io](https://codecov.io/) and [coveralls.io](https://coveralls.io/) are fine services and very easy to set up for Github repositories with Julia packages, they become more difficult to use under some circumstances. For example, if testing requires large binaries you don't want to build every time, you need to [build a Docker image]({{< ref "/post/travis-docker-julia-ci/index.mmark" >}}) to run testing and obtain coverage information. Also, if your test scripts take a long time and you have access to a powerful computer, you might want to just run coverage locally when working on the code.
 
 Naturally, Julia has all the facilities for generating and collecting coverage information locally. To make their application even easier, I packaged up a small set of scripts in [LocalCoverage.jl](https://github.com/tpapp/LocalCoverage.jl) that I use to generate and visualize coverage information for Julia packages on my machine.
 

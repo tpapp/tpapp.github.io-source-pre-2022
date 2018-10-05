@@ -8,7 +8,7 @@ title = "Getting a nice += in LaTeX math"
 +++
 
 I am working on an appendix for a paper that uses MCMC, and I decided to document some [change of varible calculations](
-{{< ref "post/jacobian-chain.mmark" >}}) in the interest of reproducibility (they are quite complex, because of multivariate determinants). But how can I typeset them nicely in $\LaTeX$? 
+{{< ref "/post/jacobian-chain.mmark" >}}) in the interest of reproducibility (they are quite complex, because of multivariate determinants). But how can I typeset them nicely in $\LaTeX$?
 
 ```latex
 \mathtt{target} += J_f
