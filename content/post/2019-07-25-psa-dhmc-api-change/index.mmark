@@ -1,0 +1,20 @@
++++
+date = 2019-07-25T10:32:13+02:00
+draft = false
+title = "PSA: breaking API changes LogDensityProblems and DynamicHMC"
+slug = ""
+categories = [""]
+tags = ["julia", "Bayesian", "MCMC", "packages"]
++++
+
+The API of LogDensityProblems and DynamicHMC is being redesigned (issues: [DynamicHMC#30](https://github.com/tpapp/DynamicHMC.jl/issues/30), [LogDensityProblems#45](https://github.com/tpapp/LogDensityProblems.jl/issues/45)). This is necessary to address some issues related to ease of use, debugging, robustness, adaptation, and better integration with some advanced AD packages like Zygote.
+
+Once the changes are complete, I will post a detailed writeup for the transition. But in the meantime, if you are using my MCMC libraries, you may want to pin versions, or put the following in your `Project.toml`'s `[compat]` section (you only need the `[compat]` if there isn't one):
+
+```toml
+[compat]
+DynamicHMC = "^1.0.5"
+LogDensityProblems = "^0.8.3"
+```
+
+For more information, please refer to the [Pkg docs](https://julialang.github.io/Pkg.jl/dev/compatibility/).
