@@ -14,7 +14,8 @@ Vienna](http://www.ihs.ac.at/research-groups/macroeconomics-and-public-finance/)
 
 * E-mail: <tkpapp@gmail.com>
 * Github (issues, PRs): <https://github.com/tpapp>
-* Julia Discourse forum: [@Tamas_Papp](https://discourse.julialang.org/u/Tamas_Papp/)
+* Julia Discourse forum: [@Tamas\_Papp](https://discourse.julialang.org/u/Tamas_Papp/)
+* Stan Discourse forum [@tpapp](https://discourse.mc-stan.org/u/tpapp/)
 
 ## Curriculum Vitae ([PDF](/pdf/cv.pdf))
 
