@@ -15,7 +15,7 @@
     <email>{{.}}</email>{{end}}
   </author>{{end}}
   <generator>Hugo -- gohugo.io</generator>
-  {{ range .Data.Pages }}
+  {{ range .Site.RegularPages }}
   <entry>
     <title type="html">{{ .Title | htmlEscape }}</title>
     <link href="{{ .Permalink }}"/>

@@ -2,7 +2,7 @@
 <div id="content">
 <h1>{{ .Title }}</h1>
 {{ .Content }}
-{{ range .Data.Pages.GroupByDate "2006-01" }}
+{{ range .Site.RegularPages.GroupByDate "2006-01" }}
 <h3>{{ .Key }}</h3>
 <ul class="mainlist">
 {{ range .Pages }}
