@@ -15,15 +15,15 @@ body {
   color: #222;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.5; }
 
 h1, h2, h3, h4 {
-  margin: 1.75rem 0 0.875rem 0;
+  margin: 1.875rem 0 0.9375rem 0;
   font-weight: 600;
   line-height: 1; }
 
 p, ol, ul {
-  margin: 0.875rem 0; }
+  margin: 0.9375rem 0; }
 
 h1 {
   font-size: 1.331em; }
@@ -147,7 +147,7 @@ small, .font_small {
 
 #content {
   padding-top: 0;
-  padding-bottom: 1.75rem;
+  padding-bottom: 1.875rem;
   padding-left: calc((100% - 40em) / 2);
   padding-right: calc((100% - 40em) / 2);
   max-width: 40em; }
@@ -226,7 +226,7 @@ small, .font_small {
         background-color: #333;
         color: #eee; }
   #content pre {
-    margin: 0.875rem 0;
+    margin: 0.9375rem 0;
     padding: 3px;
     overflow: auto;
     font-family: 'Ubuntu Mono', monospace; }
@@ -241,7 +241,7 @@ small, .font_small {
     margin: 0;
     text-align: left; }
     #content ul.mainlist li {
-      margin: 0.875rem 0; }
+      margin: 0.9375rem 0; }
       #content ul.mainlist li p.additionalinfo {
         padding: 0;
         margin: 0;
