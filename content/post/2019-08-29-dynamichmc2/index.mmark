@@ -36,7 +36,7 @@ and switching between these usually just requires changing a single line. I find
 
 In addition to this, some packages use DynamicHMC.jl as a *backend*. This is encouraged and remains to be supported. Finally, the third common use case for this package is as a *research platform* for experimenting with modern HMC algorithms: this is supported by a detailed documentation of internals.
 
-# Why a rewrite was needed
+# Why a new API was needed
 
 As bug reports and test cases kept accumulating, it was very clear that *better adaptation heuristics*, and a more sophisticated *diagnosic and warmup interface* was needed. When NUTS/HMC goes wrong with models it should be able to handle otherwise, the problem is usually with *adaptation*. The user should be able to learn what went wrong, and either manually tune stepsize and the kinetic energy metric, or choose an adaptation better suited to the model.
 
