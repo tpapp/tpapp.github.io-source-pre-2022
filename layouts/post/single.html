@@ -1,0 +1,27 @@
+{{ partial "header.html" . }}
+<div id="content">
+<h1>{{ .Title }}</h1>
+{{- .Date.Format "2006/01/02" }}
+{{- partial "tags.html" . }}
+
+{{ if or .Prev .Next }}
+<div id="pagenav">
+  {{ if .Prev }}
+  <span class="pagenav-label">previous post:</span>&nbsp;
+  <a href="{{ .Prev.Permalink }}">{{ .Prev.Title }}</a>
+  {{ end }}
+  {{ if .Next }}
+  {{ if .Prev }}
+  <br/>
+  {{ end }}
+  <span class="pagenav-label">next post:</span>&nbsp;
+  <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
+  {{ end }}
+</div>
+{{ end }}
+
+{{ .Content }}
+
+</div>
+
+{{ partial "footer.html" . }}

@@ -1,0 +1,21 @@
+{{ partial "header.html" . }}
+<div id="content">
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+{{ range .Site.RegularPages.GroupByDate "2006-01" }}
+<h3>{{ .Key }}</h3>
+<ul class="mainlist">
+{{ range .Pages }}
+<li>
+  <a href="{{ .Permalink }}">{{ .Title }}</a>
+  <p class="additionalinfo">
+    <span class="date">{{ .Date.Format "2006-01-02" }}</span>&emsp;
+    {{- partial "tags.html" . }}
+  </p>
+</li>
+{{ end }}
+</ul>
+{{ end }}
+</div>
+
+{{ partial "footer.html" . }}
