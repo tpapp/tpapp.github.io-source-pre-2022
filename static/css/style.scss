@@ -48,14 +48,14 @@ body {
     padding: 0;
     background-color: $lightbg;
     color: $lightfg;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Merriweather', serif;
     font-weight: normal;
     line-height: $base-line-height;
 }
 
 h1, h2, h3, h4 {
     margin: $vertical-rhythm 0 $vertical-rhythm * 0.5 0;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1;
 }
 
