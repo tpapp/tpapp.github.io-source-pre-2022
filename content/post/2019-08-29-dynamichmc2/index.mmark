@@ -1,6 +1,6 @@
 +++
-date = 2019-08-29T16:06:50+02:00
-draft = true
+date = 2019-09-03T09:03:50+02:00
+draft = false
 title = "ANN: DynamicHMC 2.0"
 slug = ""
 categories = [""]
@@ -11,7 +11,7 @@ I am very pleased to announce version 2.0 of [DynamicHMC.jl](https://github.com/
 
 {{< juliaversion "1.*" >}}
 
-***Note***: *my blog no longer has a comment section. Feel free to ask questions about this post [on the Julia Discourse forum](URL).*
+***Note***: *my blog no longer has a comment section. Feel free to ask questions about this post [on the Julia Discourse forum](https://discourse.julialang.org/t/ann-dynamichmc-2-0/28314).*
 
 # Some context
 
