@@ -1,0 +1,135 @@
++++
+date = 2019-09-07T08:01:57+02:00
+draft = false
+title = "How my Julia coding style changed"
+slug = ""
+categories = [""]
+tags = ["julia", "unit-testing"]
++++
+
+The [recent redesign]({{< ref "/post/2019-08-29-dynamichmc2/index.mmark" >}}) of [DynamicHMC.jl](https://github.com/tpapp/DynamicHMC.jl) provides an opportunity to reflect on how my Julia coding style changed. I started this package two years ago, and did not do any major refactoring after it became usable, mostly because I did not have a good comprehensive test suite or a solid conceptual understanding of *all* the ramifications of the algorithm, especially the adaptation, and I was afraid of breaking something that I just got working. Consequently, the code before the redesign largely reflected the coding style I developed for Julia 0.5 and then partly 0.6.
+
+I am one of those people who recognize the benefits of reflecting on the past from time to time, but are too ~~busy~~ lazy to keep a diary. But code under version control is effectively a diary about the life of software, and I find it interesting to think about how my Julia coding style has changed in the past to years.
+
+It is important to emphasize that this writeup reflects how *I* code *at the moment*. I recognize that other coding styles in Julia can be perfectly legitimate, and when I contribute to packages, I do my best to follow existing style. Also, it is very likely that my own coding style will change as the language evolves. In this blog post, I won't address details of coding style about which there is a more or less general agreement --- see [the Style Guide in the manual](https://docs.julialang.org/en/v1.4-dev/manual/style-guide/) and [YASGuide](https://github.com/jrevels/YASGuide) for useful summaries. Finally, some examples are stylized adaptations of real code for simpler exposition.
+
+# Randomness
+
+Random numbers are very important for scientific computing, but at the same time present an important challenge for writing bug-free parallel code and unit testing. A lot of code in `Random` and `Base` follows the interface conventions
+
+```julia
+rand([rng], ...)
+```
+
+making the random number generator an *optional* first argument, and defaulting to the global one.
+
+While this can be convenient for *user code*, in *packages* I find that it is better to keep the random number generator as an *explicit* argument to almost all methods. This paves the way for making the code work nicely with [composable multi-threading](https://julialang.org/blog/2019/07/multithreading) too.
+
+If random and deterministic parts of the algorithm can be separated, it should be done, as it usually makes the code cleaner, and unit testing much easier. An example of this is factoring out the [random directions for tree doubling](https://github.com/tpapp/DynamicHMC.jl/blob/20665c2010f76f8b048477491018d02a51b3b35d/src/trees.jl#L19) in NUTS: drawing a single set of bit flags *once* and providing this to the tree building algorithm, the latter can treat the doubling directions as predetermined. This also made it much easier to verify detailed balance in the unit tests.
+
+# Named tuples
+
+Named tuples are extremely useful for organizing multiple values as inputs and outputs when a composite type (`struct`) is not warranted or needed. If a function returns multiple values, especially more than two, I now always default to using named tuples, ie
+```julia
+function f(x, y)
+    a = ...
+    b = ...
+    c = ...
+    (a = a, b = b, c = c)
+end
+```
+then use `@unpack` from [Parameters.jl](https://github.com/mauro3/Parameters.jl) for destructuring:
+```julia
+@unpack a, b = f(x, y) # I don't need c here
+```
+This is costless and makes the interfaces more flexible: for example, I can add extra fields, or eventually make the returned value a composite type later, without changing anything in the callers.
+
+# Multi-liners as opposed to one-liners
+
+Almost all the “clever” one liners are now expunged from the code. Compare
+```julia
+EBFMI(x) = (πs = map(x -> x.π, x); mean(abs2, diff(πs)) / var(πs))
+```
+with
+```julia
+function EBFMI(tree_statistics)
+    πs = map(x -> x.π, tree_statistics)
+    mean(abs2, diff(πs)) / var(πs)
+end
+```
+The first one is kind of crammed, and difficult to read, while the second one makes it clear that an interim value is obtained for the calculation.
+
+When a function returns multiple values, I find it nice to assign each to a variable first, ie
+```julia
+function f(x, y)
+    a = g(x, y)
+    b = h(x, y)
+    a, b
+end
+```
+as opposed to
+```julia
+f(x, y) = g(x, y), h(x, y)
+```
+This makes the returned structure much more readable when I need to look at some code later.
+
+That said, I still have a strong preference for writing small functions that “do one thing”. This again is frequently an optimal strategy for Julia, as the compiler is very good about inlining decisions (and when not, can be nudged with `@inline`).
+
+# Abstract types can be an implementation detail
+
+Abstract types can be very useful for organizing method dispatch: code like
+```julia
+abstract type SomeAbstractType end
+
+f(x::SomeAbstractType) = do_something()
+
+struct ThatSubType{T} <: SomeAbstractType
+    y::T
+end
+
+g(x::ThatSubType) = do_something_else(x.y)
+```
+can help avoid repetition.
+
+But abstract types are just *one* convenient tool for this, and building a type tree is a tool, not an end in itself. When they are no longer adequate, other solutions such as [traits](https://docs.julialang.org/en/v1.4-dev/manual/methods/#Trait-based-dispatch-1) should be used instead.
+
+Consequently, these days I mostly consider type hierarchies an implementation detail and I am wary of exposing them in the API of a package. This is especially important if some functionality requires that the *user* of a package implements their own custom types, e.g. for a model. Requiring that
+
+```julia
+UserDefinedModel <: SomePackage.ModelType
+```
+
+to work with some API is usually *unnecessary*, and can cause unnecessary complications when the user would want `UserDefinedModel` to implement some *other* API. Either [duck typing](https://en.wikipedia.org/wiki/Duck_typing), or an explicit interface check like
+```julia
+implements_model(::Any) = false
+implements_model(::Type{<:UserDefinedModel}) = true
+```
+can work better (returning types when that is necessary, eg for further dispatch — see `Base.IteratorSize` for an example).
+
+# Small type unions
+
+The ability of the compiler create efficient code for [small type unions](https://julialang.org/blog/2018/08/union-splitting) made code organization much easier for me. For example, [`DynamicHMC.adjacent_tree`](https://github.com/tpapp/DynamicHMC.jl/blob/20665c2010f76f8b048477491018d02a51b3b35d/src/trees.jl#L197) attempts to build a tree next to some position, but this can fail because of divergence or turning in the leapfrog integrator, in which case it is useful to bail out early and return information about the reason. Consequently, this function either returns a tree, or an `InvalidTree`, which is a container with the aforementioned diagnostic information. The compiler recognizes this and generates fast code.
+
+Some attention should be paid to avoid combinatoric type explosions, but when used well, small type unions can make code much simpler at little or no extra cost.
+
+# Functional is often the best solution
+
+Preallocating containers for outputs [can make code faster](https://docs.julialang.org/en/v1.4-dev/manual/performance-tips/#Pre-allocating-outputs-1), but at the cost of extra complexity, especially that of having to figure out type parameters for said containers.
+
+My general strategy is to write code in a [functional](https://en.wikipedia.org/wiki/Functional_programming), side-effect-free style until I am really convinced that preallocation would help, and then confine it to carefully compartmentalized parts of the code. This is of course ideal only for *some* kinds of code — when [allocations dominate](http://www.stochasticlifestyle.com/when-do-micro-optimizations-matter-in-scientific-computing/), a functional style is not optimal.
+
+That said, Julia's compiler is getting more and more clever about optimizing allocations, so I frequently find that I never rewrite code with preallocated containers, and occasionally even revert from preallocated code to a functional style without a relevant performance cost.
+
+# When in doubt, document
+
+Some readers of the code of [DynamicHMC.jl](https://github.com/tpapp/DynamicHMC.jl) will have the impression that it is *overdocumented*. Probably 20–25% of the lines in the source are docstrings, and most internal interfaces and convenience functions have one.
+
+Primarily, this is driven by instances of the embarassing realization of having written some code two years ago which kind of works, but no longer being sure of all the details that would be nice to know before refactoring. But another consideration is encouraging contributions, or uses of the packages for research — besides being an implementation of the NUTS sampler, [DynamicHMC.jl](https://github.com/tpapp/DynamicHMC.jl) is also a platform for experimenting, which is easier to do when the internals are documented.
+
+Julia's documentation ecosystem is now very mature and robust. Besides the excellent [Documenter.jl](https://github.com/JuliaDocs/Documenter.jl), I also find [DocStringExtensions.jl](https://github.com/JuliaDocs/DocStringExtensions.jl) very useful.
+
+# Internal interfaces have high return on investment
+
+Many packages, especially those that are work in progress or experimental, do not document their *user* interfaces very carefully. This is of course understandable, but I have developed a preference for abstracting out and documenting interfaces in *internally used code*, too, as the package matures.
+
+This makes refactoring and compartmentalization much easier, and makes sense even if a particular interface has only a *single implementation in the package*, because unit tests can just provide a “dummy” implementation and test related code that way. An example of this is the code for [“trees”](https://github.com/tpapp/DynamicHMC.jl/blob/4c0d616ebaa4cec900d5f023376f08f204feb020/src/trees.jl) and the [related tests](https://github.com/tpapp/DynamicHMC.jl/blob/4c0d616ebaa4cec900d5f023376f08f204feb020/test/test-trees.jl): trees here are an abstraction for walking *integer positions* in two directions. This is key for the NUTS algorithm, but can be handled as an abstraction separate from the details of leapfrog integrators.
