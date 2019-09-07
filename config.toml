@@ -1,9 +1,9 @@
 baseurl = "https://tamaspapp.eu/"
 languageCode = "en-us"
 title = "Tamás K. Papp's website"
-# relativeURLs = true
+relativeURLs = true
 # canonifyURLs = true
-disqusShortname = "tpappgithubio"
+# disqusShortname = "tpappgithubio"
 Copyright = "Copyright 2017, Tamás K. Papp. [CC-BY-SA](https://creativecommons.org/licenses/by-sa/4.0/legalcode)."
 pygmentsStyle = "murphy"
 pygmentsUseClasses = true
