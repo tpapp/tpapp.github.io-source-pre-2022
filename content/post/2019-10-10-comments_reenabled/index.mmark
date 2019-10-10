@@ -1,0 +1,10 @@
++++
+date = 2019-10-10T17:40:39+02:00
+draft = false
+title = "Comments reenabled"
+slug = ""
+categories = [""]
+tags = ["blogging"]
++++
+
+I have re-enabled comments using [utterances](https://utteranc.es/), which uses Github issues to record and render comments. You need to login via Github to comment.
