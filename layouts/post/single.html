@@ -4,18 +4,18 @@
 {{- .Date.Format "2006/01/02" }}
 {{- partial "tags.html" . }}
 
-{{ if or .Prev .Next }}
+{{ if or .PrevInSection .NextInSection }}
 <div id="pagenav">
-  {{ if .Prev }}
+  {{ if .PrevInSection }}
   <span class="pagenav-label">previous post:</span>&nbsp;
-  <a href="{{ .Prev.Permalink }}">{{ .Prev.Title }}</a>
+  <a href="{{ .PrevInSection.Permalink }}">{{ .PrevInSection.Title }}</a>
   {{ end }}
-  {{ if .Next }}
-  {{ if .Prev }}
+  {{ if .NextInSection }}
+  {{ if .PrevInSection }}
   <br/>
   {{ end }}
   <span class="pagenav-label">next post:</span>&nbsp;
-  <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
+  <a href="{{ .NextInSection.Permalink }}">{{ .NextInSection.Title }}</a>
   {{ end }}
 </div>
 {{ end }}

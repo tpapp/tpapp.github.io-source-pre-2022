@@ -18,5 +18,8 @@ preserveTaxonomyNames = true
         mathjax = true
         math = true
 
-[blackfriday]
-        extensionsmask = ["backslashLineBreak"]
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
